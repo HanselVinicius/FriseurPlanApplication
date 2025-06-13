@@ -1,15 +1,16 @@
-package com.hansel.FriseurPlan.domain;
+package com.hansel.FriseurPlan.domain.appointment;
 
 
-import java.time.LocalDateTime;
+import com.hansel.FriseurPlan.domain.costumer.Costumer;
+import com.hansel.FriseurPlan.domain.hairdresser.Hairdresser;
 
 public class Appointment {
     private final TimeRange timeRange;
     private final Costumer costumer;
     private final Hairdresser hairdresser;
 
-    private Appointment(LocalDateTime startTime, LocalDateTime endTime, Costumer costumer, Hairdresser hairdresser) {
-        this.timeRange = TimeRange.create(startTime, endTime);
+    private Appointment(TimeRange timeRange, Costumer costumer, Hairdresser hairdresser) {
+        this.timeRange = timeRange;
         this.costumer = costumer;
         this.hairdresser = hairdresser;
     }
@@ -18,12 +19,12 @@ public class Appointment {
         return timeRange;
     }
 
-    public static Appointment create(LocalDateTime startTime, LocalDateTime endTime, Costumer costumer, Hairdresser hairdresser) {
+    public static Appointment create(TimeRange timeRange, Costumer costumer, Hairdresser hairdresser) {
         if (costumer == null || hairdresser == null) {
             throw new IllegalArgumentException("All parameters must be provided");
         }
 
-        Appointment appointment = new Appointment(startTime, endTime, costumer, hairdresser);
+        Appointment appointment = new Appointment(timeRange, costumer, hairdresser);
         hairdresser.addAppointment(appointment);
 
         return appointment;

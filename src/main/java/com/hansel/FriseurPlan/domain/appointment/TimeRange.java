@@ -1,4 +1,4 @@
-package com.hansel.FriseurPlan.domain;
+package com.hansel.FriseurPlan.domain.appointment;
 
 import java.time.LocalDateTime;
 
