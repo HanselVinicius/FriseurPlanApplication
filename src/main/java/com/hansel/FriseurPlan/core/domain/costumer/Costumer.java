@@ -1,8 +1,8 @@
-package com.hansel.FriseurPlan.domain.costumer;
+package com.hansel.FriseurPlan.core.domain.costumer;
 
-import com.hansel.FriseurPlan.domain.hairdresser.Hairdresser;
-import com.hansel.FriseurPlan.domain.appointment.Appointment;
-import com.hansel.FriseurPlan.domain.appointment.TimeRange;
+import com.hansel.FriseurPlan.core.domain.hairdresser.Hairdresser;
+import com.hansel.FriseurPlan.core.domain.appointment.Appointment;
+import com.hansel.FriseurPlan.core.domain.appointment.TimeRange;
 
 public class Costumer {
     private final Long id;
@@ -16,6 +16,9 @@ public class Costumer {
     }
 
     public static Costumer create(Long id, String name, String phoneNumber) {
+        if (name == null || phoneNumber == null) {
+            throw new IllegalArgumentException("All parameters must be provided");
+        }
         return new Costumer(id, name, phoneNumber);
     }
 
@@ -24,4 +27,15 @@ public class Costumer {
         return Appointment.create(timeRange, this, hairdresser);
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
 }

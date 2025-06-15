@@ -1,5 +1,6 @@
-package com.hansel.FriseurPlan.domain.appointment;
+package com.hansel.FriseurPlan.core.domain.appointment;
 
+import com.hansel.FriseurPlan.core.domain.appointment.TimeRange;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;

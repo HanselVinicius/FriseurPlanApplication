@@ -1,8 +1,8 @@
-package com.hansel.FriseurPlan.domain.appointment;
+package com.hansel.FriseurPlan.core.domain.appointment;
 
 
-import com.hansel.FriseurPlan.domain.costumer.Costumer;
-import com.hansel.FriseurPlan.domain.hairdresser.Hairdresser;
+import com.hansel.FriseurPlan.core.domain.costumer.Costumer;
+import com.hansel.FriseurPlan.core.domain.hairdresser.Hairdresser;
 
 public class Appointment {
     private final TimeRange timeRange;

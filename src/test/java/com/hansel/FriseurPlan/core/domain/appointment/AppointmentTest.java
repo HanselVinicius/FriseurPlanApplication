@@ -1,8 +1,10 @@
-package com.hansel.FriseurPlan.domain.appointment;
+package com.hansel.FriseurPlan.core.domain.appointment;
 
 
-import com.hansel.FriseurPlan.domain.costumer.Costumer;
-import com.hansel.FriseurPlan.domain.hairdresser.Hairdresser;
+import com.hansel.FriseurPlan.core.domain.appointment.Appointment;
+import com.hansel.FriseurPlan.core.domain.appointment.TimeRange;
+import com.hansel.FriseurPlan.core.domain.costumer.Costumer;
+import com.hansel.FriseurPlan.core.domain.hairdresser.Hairdresser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

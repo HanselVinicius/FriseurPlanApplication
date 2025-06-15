@@ -1,6 +1,6 @@
-package com.hansel.FriseurPlan.domain.hairdresser;
+package com.hansel.FriseurPlan.core.domain.hairdresser;
 
-import com.hansel.FriseurPlan.domain.appointment.Appointment;
+import com.hansel.FriseurPlan.core.domain.appointment.Appointment;
 
 import java.util.List;
 
