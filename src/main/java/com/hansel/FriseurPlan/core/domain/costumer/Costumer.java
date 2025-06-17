@@ -1,5 +1,6 @@
 package com.hansel.FriseurPlan.core.domain.costumer;
 
+import com.hansel.FriseurPlan.core.domain.PhoneNumber;
 import com.hansel.FriseurPlan.core.domain.hairdresser.Hairdresser;
 import com.hansel.FriseurPlan.core.domain.appointment.Appointment;
 import com.hansel.FriseurPlan.core.domain.appointment.TimeRange;
@@ -7,12 +8,12 @@ import com.hansel.FriseurPlan.core.domain.appointment.TimeRange;
 public class Costumer {
     private final Long id;
     private final String name;
-    private final String phoneNumber;
+    private final PhoneNumber phoneNumber;
 
     private Costumer(Long id, String name, String phoneNumber) {
         this.id = id;
         this.name = name;
-        this.phoneNumber = phoneNumber;
+        this.phoneNumber = PhoneNumber.create(phoneNumber);
     }
 
     public static Costumer create(Long id, String name, String phoneNumber) {
@@ -24,7 +25,7 @@ public class Costumer {
 
 
     public Appointment markAppointment(Hairdresser hairdresser, TimeRange timeRange) {
-        return Appointment.create(timeRange, this, hairdresser);
+        return Appointment.create(null,timeRange, this, hairdresser);
     }
 
     public Long getId() {
@@ -35,7 +36,7 @@ public class Costumer {
         return name;
     }
 
-    public String getPhoneNumber() {
+    public PhoneNumber getPhoneNumber() {
         return phoneNumber;
     }
 }

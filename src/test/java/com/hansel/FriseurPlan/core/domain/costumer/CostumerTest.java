@@ -15,14 +15,14 @@ class CostumerTest {
 
     @Test
     void shouldCreateValidCostumer() {
-        Costumer costumer = Costumer.create(null, "John Doe", "123456789");
+        Costumer costumer = Costumer.create(null, "John Doe", "16992977903");
 
         assertNotNull(costumer);
     }
 
     @Test
     void shouldThrowExceptionWhenCreatingCostumerWithNullName() {
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> Costumer.create(1L, null, "123456789"));
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> Costumer.create(1L, null, "16992977903"));
 
         assertEquals("All parameters must be provided", exception.getMessage());
     }
@@ -36,7 +36,7 @@ class CostumerTest {
 
     @Test
     void shouldMarkAppointment() {
-        Costumer costumer = Costumer.create(1L, "John Doe", "123456789");
+        Costumer costumer = Costumer.create(1L, "John Doe", "16992977903");
         Hairdresser hairdresser = Hairdresser.create(1L, "Jane Smith",new ArrayList<>());
         TimeRange timeRange = TimeRange.create(LocalDateTime.of(2023, 10, 1, 10, 0), LocalDateTime.of(2023, 10, 1, 11, 0));
 

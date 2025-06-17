@@ -26,9 +26,9 @@ class HairdresserTest {
     @Test
     void shouldSuccessfullyAddAppointment() {
         Hairdresser hairdresser = Hairdresser.create(1L, "Jane Smith", new ArrayList<>());
-        Appointment appointment = Appointment.create(
+        Appointment appointment = Appointment.create(null,
                 TimeRange.create(LocalDateTime.of(2023, 10, 1, 10, 0), LocalDateTime.of(2023, 10, 1, 11, 0)),
-                Costumer.create(1L, "John Doe", "123456789"),
+                Costumer.create(1L, "John Doe", "16992977903"),
                 hairdresser
         );
 

@@ -33,6 +33,7 @@ docker compose up --build
 | `KEYCLOAK_ADMIN`          | Admin username for Keycloak                            | `admin`                                          |
 | `KEYCLOAK_ADMIN_PASSWORD` | Admin password for Keycloak                            | `adminpassword`                                  |
 | `KEYCLOAK_DB_URL`         | Keycloak db url                                        | `jdbc:postgresql://keycloak-db:5432/FriseurAuth` |
-
+| `CLIENT_ID`               | Keycloak client id                                     | `friseurplan-client`                             |
+| `CLIENT_SECRET`           | Keycloak client secret                                 | `asfddahrtgsdgarfeafegea`                        |
 
 ## Tests

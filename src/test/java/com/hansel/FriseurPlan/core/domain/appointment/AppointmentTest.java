@@ -1,8 +1,7 @@
 package com.hansel.FriseurPlan.core.domain.appointment;
 
 
-import com.hansel.FriseurPlan.core.domain.appointment.Appointment;
-import com.hansel.FriseurPlan.core.domain.appointment.TimeRange;
+
 import com.hansel.FriseurPlan.core.domain.costumer.Costumer;
 import com.hansel.FriseurPlan.core.domain.hairdresser.Hairdresser;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,10 +26,10 @@ class AppointmentTest {
     @Test
     public void shouldCreateValidAppointment() {
 
-        Costumer costumer = Costumer.create(1L, "John Doe", "123456789");
+        Costumer costumer = Costumer.create(1L, "John Doe", "16992977903");
         Hairdresser hairdresser = Hairdresser.create(1L, "Jane Smith", new ArrayList<>());
 
-        Appointment appointment = Appointment.create(timeRange, costumer, hairdresser);
+        Appointment appointment = Appointment.create(null,timeRange, costumer, hairdresser);
 
         assertNotNull(appointment);
         assertEquals(startTime, appointment.getTimeRange().getStartTime());
@@ -48,13 +47,13 @@ class AppointmentTest {
         LocalDateTime appointedEndTime = LocalDateTime.of(2023, 10, 1, 11, 0);
         TimeRange appointedTimeRange = TimeRange.create(appointedStartTime, appointedEndTime);
 
-        Costumer costumer = Costumer.create(1L, "John Doe", "123456789");
+        Costumer costumer = Costumer.create(1L, "John Doe", "16992977903");
         Hairdresser hairdresser = Hairdresser.create(1L, "Jane Smith", new ArrayList<>());
 
-        Appointment.create(appointedTimeRange, costumer, hairdresser);
+        Appointment.create(null,appointedTimeRange, costumer, hairdresser);
 
 
-        assertThrows(IllegalArgumentException.class, () -> Appointment.create(timeRange, costumer, hairdresser));
+        assertThrows(IllegalArgumentException.class, () -> Appointment.create(null,timeRange, costumer, hairdresser));
     }
 
 

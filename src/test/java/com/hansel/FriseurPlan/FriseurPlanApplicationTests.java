@@ -10,6 +10,7 @@ class FriseurPlanApplicationTests {
 
 	@Test
 	void contextLoads() {
+		assert true;
 	}
 
 }

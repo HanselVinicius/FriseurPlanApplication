@@ -32,4 +32,17 @@ public class TimeRange {
     public LocalDateTime getEndTime() {
         return endTime;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        TimeRange that = (TimeRange) obj;
+        return startTime.equals(that.startTime) && endTime.equals(that.endTime);
+    }
+
+    @Override
+    public int hashCode() {
+        return startTime.hashCode() ^ endTime.hashCode();
+    }
 }
