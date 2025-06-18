@@ -1,6 +1,7 @@
 package com.hansel.FriseurPlan.port.output.entities.costumer;
 
 import com.hansel.FriseurPlan.core.domain.PhoneNumber;
+import com.hansel.FriseurPlan.port.output.entities.EmailVo;
 import com.hansel.FriseurPlan.port.output.entities.PhoneNumberConverter;
 import jakarta.persistence.*;
 import lombok.*;
@@ -24,9 +25,12 @@ public class CostumerEntity {
     private String name;
     @Convert(converter = PhoneNumberConverter.class)
     private PhoneNumber phoneNumber;
+    @Embedded
+    private EmailVo email;
     @CreationTimestamp
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private LocalDateTime deletedAt;
+
 
 }

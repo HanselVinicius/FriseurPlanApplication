@@ -1,5 +1,6 @@
 package com.hansel.FriseurPlan.core.domain.costumer;
 
+import com.hansel.FriseurPlan.core.domain.Email;
 import com.hansel.FriseurPlan.core.domain.PhoneNumber;
 import com.hansel.FriseurPlan.core.domain.hairdresser.Hairdresser;
 import com.hansel.FriseurPlan.core.domain.appointment.Appointment;
@@ -9,18 +10,20 @@ public class Costumer {
     private final Long id;
     private final String name;
     private final PhoneNumber phoneNumber;
+    private final Email email;
 
-    private Costumer(Long id, String name, String phoneNumber) {
+    private Costumer(Long id, String name, String phoneNumber, Email email) {
         this.id = id;
         this.name = name;
         this.phoneNumber = PhoneNumber.create(phoneNumber);
+        this.email = email;
     }
 
-    public static Costumer create(Long id, String name, String phoneNumber) {
+    public static Costumer create(Long id, String name, String phoneNumber, Email email) {
         if (name == null || phoneNumber == null) {
             throw new IllegalArgumentException("All parameters must be provided");
         }
-        return new Costumer(id, name, phoneNumber);
+        return new Costumer(id, name, phoneNumber,email);
     }
 
 
@@ -38,5 +41,9 @@ public class Costumer {
 
     public PhoneNumber getPhoneNumber() {
         return phoneNumber;
+    }
+
+    public Email getEmail() {
+        return email;
     }
 }

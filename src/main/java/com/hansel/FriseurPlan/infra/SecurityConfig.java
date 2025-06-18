@@ -16,7 +16,10 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests(
-                        authorizeConfig -> authorizeConfig.anyRequest().authenticated())
+                        authorizeConfig -> {
+                            authorizeConfig.anyRequest().authenticated();
+                        }
+                )
                 .oauth2Login(withDefaults())
                 .oauth2ResourceServer(conf -> conf.jwt(withDefaults()))
                 .build();

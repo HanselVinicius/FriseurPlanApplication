@@ -1,8 +1,10 @@
 package com.hansel.FriseurPlan.core.application.usecase.costumer.command;
 
 import com.hansel.FriseurPlan.core.application.adapter.CostumerCommandClient;
+import com.hansel.FriseurPlan.core.domain.Email;
 import com.hansel.FriseurPlan.core.domain.costumer.Costumer;
 import com.hansel.FriseurPlan.core.application.usecase.dto.CostumerDto;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -22,13 +24,20 @@ class CostumerCommandsUseCaseTest {
     @InjectMocks
     private CostumerCommandsUseCase costumerCommandsUseCase;
 
+    private Email email;
+
+    @BeforeEach
+    void setUp() {
+        email = Email.create("hanelvinicius@gmail.com", false);
+    }
+
     @Test
     void shouldCreateCostumer(){
         CostumerDto costumerDto = new CostumerDto("Hansel", "16992977903");
-        Costumer costumer = Costumer.create(null, costumerDto.name(), costumerDto.phoneNumber());
+        Costumer costumer = Costumer.create(null, costumerDto.name(), costumerDto.phoneNumber(),email);
         when(costumerCommandClient.createCostumer(any(Costumer.class))).thenReturn(costumer);
 
-        Costumer result = this.costumerCommandsUseCase.createCostumer(costumerDto);
+        Costumer result = this.costumerCommandsUseCase.createCostumer(costumerDto,email);
 
         verify(costumerCommandClient).createCostumer(any(Costumer.class));
         assertNotNull(result);
