@@ -1,5 +1,8 @@
 package com.hansel.FriseurPlan.core.domain.hairdresser;
 
+import com.hansel.FriseurPlan.core.domain.Address;
+import com.hansel.FriseurPlan.core.domain.Email;
+import com.hansel.FriseurPlan.core.domain.PhoneNumber;
 import com.hansel.FriseurPlan.core.domain.appointment.Appointment;
 
 import java.util.List;
@@ -8,15 +11,21 @@ public class Hairdresser {
     private final Long id;
     private final String name;
     private final List<Appointment> appointments;
+    private final PhoneNumber phoneNumber;
+    private final Email email;
+    private final Address address;
 
-    private Hairdresser(Long id, String name, List<Appointment> appointments) {
+    private Hairdresser(Long id, String name, List<Appointment> appointments,PhoneNumber phoneNumber, Email email,Address address) {
         this.id = id;
         this.name = name;
         this.appointments = appointments;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.address = address;
     }
 
-    public static Hairdresser create(Long id, String name, List<Appointment> appointments) {
-        return new Hairdresser(id, name, appointments);
+    public static Hairdresser create(Long id, String name, List<Appointment> appointments,PhoneNumber phoneNumber, Email email,Address address) {
+        return new Hairdresser(id, name, appointments,phoneNumber,email,address);
     }
 
     public void addAppointment(Appointment appointment) {
@@ -38,5 +47,17 @@ public class Hairdresser {
 
     public List<Appointment> getAppointments() {
         return appointments;
+    }
+
+    public PhoneNumber getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public Email getEmail() {
+        return email;
+    }
+
+    public Address getAddress() {
+        return address;
     }
 }

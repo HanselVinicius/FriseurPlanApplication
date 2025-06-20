@@ -1,0 +1,26 @@
+package com.hansel.FriseurPlan.infra.port.output.client.costumer;
+
+import com.hansel.FriseurPlan.core.domain.costumer.Costumer;
+import com.hansel.FriseurPlan.infra.port.output.entities.EmailVo;
+import com.hansel.FriseurPlan.infra.port.output.entities.costumer.CostumerEntity;
+
+public class CostumerMapper {
+
+    public static CostumerEntity toCostumerEntity(Costumer costumer) {
+        return CostumerEntity.builder()
+                .id(costumer.getId())
+                .name(costumer.getName())
+                .phoneNumber(costumer.getPhoneNumber())
+                .email(EmailVo.fromEmailDomain(costumer.getEmail()))
+                .build();
+    }
+
+    public static Costumer toCostumer(CostumerEntity costumerEntity) {
+        return Costumer.create(
+                costumerEntity.getId(),
+                costumerEntity.getName(),
+                costumerEntity.getPhoneNumber().getNumber(),
+                costumerEntity.getEmail().toEmailDomain()
+        );
+    }
+}
