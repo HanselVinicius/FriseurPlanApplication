@@ -1,8 +1,8 @@
 package com.hansel.FriseurPlan.core.domain;
 
 public class Email {
-    private String email;
-    private boolean verified;
+    private final String email;
+    private final boolean verified;
 
     private Email(String email, boolean verified) {
         this.email = email;

@@ -3,11 +3,11 @@ package com.hansel.FriseurPlan.core.domain;
 import java.util.Objects;
 
 public class Address {
-    private String street;
-    private int number;
-    private String city;
-    private String state;
-    private Long zipCode;
+    private final String street;
+    private final int number;
+    private final String city;
+    private final String state;
+    private final Long zipCode;
 
 
     private Address(String street, int number, String city, String state, Long zipCode) {

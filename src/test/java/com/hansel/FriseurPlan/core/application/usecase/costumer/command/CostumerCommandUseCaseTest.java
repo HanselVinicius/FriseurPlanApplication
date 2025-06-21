@@ -1,6 +1,6 @@
 package com.hansel.FriseurPlan.core.application.usecase.costumer.command;
 
-import com.hansel.FriseurPlan.core.application.adapter.CostumerCommandClient;
+import com.hansel.FriseurPlan.core.application.adapter.costumer.command.CostumerCommandClient;
 import com.hansel.FriseurPlan.core.domain.Email;
 import com.hansel.FriseurPlan.core.domain.costumer.Costumer;
 import com.hansel.FriseurPlan.core.application.usecase.dto.CostumerDto;
@@ -17,27 +17,29 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class CostumerCommandsUseCaseTest {
+class CostumerCommandUseCaseTest {
 
     @Mock
     private CostumerCommandClient costumerCommandClient;
     @InjectMocks
-    private CostumerCommandsUseCase costumerCommandsUseCase;
+    private CostumerCommandUseCase costumerCommandUseCase;
 
     private Email email;
+    private CostumerDto costumerDto;
+    private Costumer costumer;
 
     @BeforeEach
     void setUp() {
         email = Email.create("hanelvinicius@gmail.com", false);
+        costumerDto = new CostumerDto("Hansel", "16992977903");
+        costumer = Costumer.create(null, costumerDto.name(), costumerDto.phoneNumber(),email);
     }
 
     @Test
     void shouldCreateCostumer(){
-        CostumerDto costumerDto = new CostumerDto("Hansel", "16992977903");
-        Costumer costumer = Costumer.create(null, costumerDto.name(), costumerDto.phoneNumber(),email);
         when(costumerCommandClient.createCostumer(any(Costumer.class))).thenReturn(costumer);
 
-        Costumer result = this.costumerCommandsUseCase.createCostumer(costumerDto,email);
+        Costumer result = this.costumerCommandUseCase.createCostumer(costumerDto,email);
 
         verify(costumerCommandClient).createCostumer(any(Costumer.class));
         assertNotNull(result);

@@ -1,6 +1,6 @@
 package com.hansel.FriseurPlan.core.application.usecase.costumer.command;
 
-import com.hansel.FriseurPlan.core.application.adapter.CostumerCommandClient;
+import com.hansel.FriseurPlan.core.application.adapter.costumer.command.CostumerCommandClient;
 import com.hansel.FriseurPlan.core.domain.Email;
 import com.hansel.FriseurPlan.core.domain.costumer.Costumer;
 import com.hansel.FriseurPlan.core.application.usecase.dto.CostumerDto;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class CostumerCommandsUseCase {
+public class CostumerCommandUseCase {
 
     private final CostumerCommandClient costumerCommandClient;
 

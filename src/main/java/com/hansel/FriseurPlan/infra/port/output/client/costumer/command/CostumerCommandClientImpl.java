@@ -1,7 +1,8 @@
-package com.hansel.FriseurPlan.infra.port.output.client.costumer;
+package com.hansel.FriseurPlan.infra.port.output.client.costumer.command;
 
-import com.hansel.FriseurPlan.core.application.adapter.CostumerCommandClient;
+import com.hansel.FriseurPlan.core.application.adapter.costumer.command.CostumerCommandClient;
 import com.hansel.FriseurPlan.core.domain.costumer.Costumer;
+import com.hansel.FriseurPlan.infra.port.output.client.costumer.CostumerMapper;
 import com.hansel.FriseurPlan.infra.port.output.entities.costumer.CostumerEntity;
 import com.hansel.FriseurPlan.infra.port.output.entities.costumer.CostumerEntityRepository;
 import lombok.RequiredArgsConstructor;

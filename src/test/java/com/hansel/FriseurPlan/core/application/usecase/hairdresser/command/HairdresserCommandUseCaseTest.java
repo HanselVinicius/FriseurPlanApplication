@@ -21,12 +21,12 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class HairdresserCommandsUseCaseTest {
+class HairdresserCommandUseCaseTest {
 
     @Mock
     private HairdresserCommandClient hairdresserCommandClient;
     @InjectMocks
-    private HairdresserCommandsUseCase hairdresserCommandsUseCase;
+    private HairdresserCommandUseCase hairdresserCommandUseCase;
 
     private Email email;
     private PhoneNumber phoneNumber;
@@ -45,7 +45,7 @@ class HairdresserCommandsUseCaseTest {
         Hairdresser hairdresser = Hairdresser.create(null, hairdresserDto.name(), new ArrayList<>(), phoneNumber, email, address);
 
         when(hairdresserCommandClient.createHairdresser(any(Hairdresser.class))).thenReturn(hairdresser);
-        Hairdresser result = hairdresserCommandsUseCase.createHairdresser(hairdresserDto, email);
+        Hairdresser result = hairdresserCommandUseCase.createHairdresser(hairdresserDto, email);
 
         verify(hairdresserCommandClient).createHairdresser(any(Hairdresser.class));
         assertNotNull(result);

@@ -3,7 +3,7 @@ package com.hansel.FriseurPlan.core.domain;
 
 public class PhoneNumber {
 
-    private String number;
+    private final String number;
 
     private PhoneNumber(String number) {
         this.number = number;

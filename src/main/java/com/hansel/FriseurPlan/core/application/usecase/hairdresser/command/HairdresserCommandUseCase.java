@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 @Service
 @RequiredArgsConstructor
-public class HairdresserCommandsUseCase {
+public class HairdresserCommandUseCase {
 
     private final HairdresserCommandClient hairdresserCommandClient;
 
