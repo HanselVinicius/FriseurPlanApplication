@@ -1,6 +1,7 @@
 package com.hansel.FriseurPlan.core.application.usecase.costumer.command;
 
 import com.hansel.FriseurPlan.core.application.adapter.costumer.command.CostumerCommandClient;
+import com.hansel.FriseurPlan.core.application.usecase.costumer.query.CostumerQueryUseCase;
 import com.hansel.FriseurPlan.core.domain.Email;
 import com.hansel.FriseurPlan.core.domain.costumer.Costumer;
 import com.hansel.FriseurPlan.core.application.usecase.dto.CostumerDto;
@@ -21,6 +22,8 @@ class CostumerCommandUseCaseTest {
 
     @Mock
     private CostumerCommandClient costumerCommandClient;
+    @Mock
+    private CostumerQueryUseCase costumerQueryUseCase;
     @InjectMocks
     private CostumerCommandUseCase costumerCommandUseCase;
 
@@ -46,6 +49,15 @@ class CostumerCommandUseCaseTest {
         assertEquals("Hansel", result.getName());
         assertEquals("16992977903", result.getPhoneNumber().getNumber());
         assertNull(result.getId());
+    }
+
+    @Test
+    void shouldFailToCreateCostumerWhenEmailAlreadyExists() {
+        when(costumerQueryUseCase.getCostumerByEmail(email)).thenReturn(costumer);
+
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> this.costumerCommandUseCase.createCostumer(costumerDto, email));
+
+        assertEquals("Costumer with this email already exists", exception.getMessage());
     }
 
 

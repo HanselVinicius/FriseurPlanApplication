@@ -1,7 +1,8 @@
 package com.hansel.FriseurPlan.core.application.usecase.hairdresser.command;
 
-import com.hansel.FriseurPlan.core.application.adapter.HairdresserCommandClient;
+import com.hansel.FriseurPlan.core.application.adapter.hairdresser.command.HairdresserCommandClient;
 import com.hansel.FriseurPlan.core.application.usecase.dto.HairdresserDto;
+import com.hansel.FriseurPlan.core.application.usecase.hairdresser.query.HairdresserQueryUseCase;
 import com.hansel.FriseurPlan.core.domain.Address;
 import com.hansel.FriseurPlan.core.domain.Email;
 import com.hansel.FriseurPlan.core.domain.PhoneNumber;
@@ -25,6 +26,8 @@ class HairdresserCommandUseCaseTest {
 
     @Mock
     private HairdresserCommandClient hairdresserCommandClient;
+    @Mock
+    private HairdresserQueryUseCase hairdresserQueryUseCase;
     @InjectMocks
     private HairdresserCommandUseCase hairdresserCommandUseCase;
 
@@ -56,5 +59,19 @@ class HairdresserCommandUseCaseTest {
         assertTrue(result.getAppointments().isEmpty(), "New hairdresser should have no appointments");
         assertNull(result.getId(), "New hairdresser should not have an ID yet");
         assertEquals(hairdresserDto.address(), result.getAddress(), "Address should match the one provided in the DTO");
+    }
+
+    @Test
+    void shouldFailToCreateHairdresserWhenEmailAlreadyExists() {
+        HairdresserDto hairdresserDto = new HairdresserDto("John Doe", phoneNumber, address);
+        Hairdresser hairdresser = Hairdresser.create(null, hairdresserDto.name(), new ArrayList<>(), phoneNumber, email, address);
+
+        when(hairdresserQueryUseCase.getHairdresserByEmail(hairdresser.getEmail())).thenReturn(hairdresser);
+
+        Exception exception = assertThrows(IllegalArgumentException.class, () ->
+            hairdresserCommandUseCase.createHairdresser(hairdresserDto, email)
+        );
+
+        assertEquals("Hairdresser with this email already exists", exception.getMessage(), "Should throw an exception when trying to create a hairdresser with an existing email");
     }
 }

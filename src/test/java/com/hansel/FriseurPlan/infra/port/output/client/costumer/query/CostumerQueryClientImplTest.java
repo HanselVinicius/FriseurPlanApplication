@@ -3,6 +3,7 @@ package com.hansel.FriseurPlan.infra.port.output.client.costumer.query;
 import com.hansel.FriseurPlan.core.domain.Email;
 import com.hansel.FriseurPlan.core.domain.costumer.Costumer;
 import com.hansel.FriseurPlan.infra.port.output.client.costumer.CostumerMapper;
+import com.hansel.FriseurPlan.infra.port.output.entities.EmailVo;
 import com.hansel.FriseurPlan.infra.port.output.entities.costumer.CostumerEntity;
 import com.hansel.FriseurPlan.infra.port.output.entities.costumer.CostumerEntityRepository;
 import org.junit.jupiter.api.BeforeEach;

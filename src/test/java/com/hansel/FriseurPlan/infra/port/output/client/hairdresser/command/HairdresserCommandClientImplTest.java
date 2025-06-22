@@ -1,4 +1,4 @@
-package com.hansel.FriseurPlan.infra.port.output.client.hairdresser;
+package com.hansel.FriseurPlan.infra.port.output.client.hairdresser.command;
 
 import com.hansel.FriseurPlan.core.domain.Address;
 import com.hansel.FriseurPlan.core.domain.Email;

@@ -1,7 +1,8 @@
-package com.hansel.FriseurPlan.infra.port.output.client.hairdresser;
+package com.hansel.FriseurPlan.infra.port.output.client.hairdresser.command;
 
-import com.hansel.FriseurPlan.core.application.adapter.HairdresserCommandClient;
+import com.hansel.FriseurPlan.core.application.adapter.hairdresser.command.HairdresserCommandClient;
 import com.hansel.FriseurPlan.core.domain.hairdresser.Hairdresser;
+import com.hansel.FriseurPlan.infra.port.output.client.hairdresser.HairdresserMapper;
 import com.hansel.FriseurPlan.infra.port.output.entities.hairdresser.HairdresserEntity;
 import com.hansel.FriseurPlan.infra.port.output.entities.hairdresser.HairdresserEntityRepository;
 import lombok.RequiredArgsConstructor;
