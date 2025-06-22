@@ -1,7 +1,7 @@
 package com.hansel.FriseurPlan.infra.port.output.client.hairdresser;
 
 import com.hansel.FriseurPlan.core.domain.Address;
-import com.hansel.FriseurPlan.core.domain.Email;
+import com.hansel.FriseurPlan.core.domain.email.Email;
 import com.hansel.FriseurPlan.core.domain.PhoneNumber;
 import com.hansel.FriseurPlan.core.domain.hairdresser.Hairdresser;
 import com.hansel.FriseurPlan.infra.port.output.entities.AddressVo;

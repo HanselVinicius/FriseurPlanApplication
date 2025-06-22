@@ -2,9 +2,10 @@ package com.hansel.FriseurPlan.core.application.usecase.costumer.command;
 
 import com.hansel.FriseurPlan.core.application.adapter.costumer.command.CostumerCommandClient;
 import com.hansel.FriseurPlan.core.application.usecase.costumer.query.CostumerQueryUseCase;
-import com.hansel.FriseurPlan.core.domain.Email;
+import com.hansel.FriseurPlan.core.domain.email.Email;
 import com.hansel.FriseurPlan.core.domain.costumer.Costumer;
 import com.hansel.FriseurPlan.core.application.usecase.dto.CostumerDto;
+import com.hansel.FriseurPlan.core.domain.email.ValidateEmailIsUniqueService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,7 +24,7 @@ class CostumerCommandUseCaseTest {
     @Mock
     private CostumerCommandClient costumerCommandClient;
     @Mock
-    private CostumerQueryUseCase costumerQueryUseCase;
+    private ValidateEmailIsUniqueService validateEmailIsUniqueService;
     @InjectMocks
     private CostumerCommandUseCase costumerCommandUseCase;
 
@@ -41,6 +42,7 @@ class CostumerCommandUseCaseTest {
     @Test
     void shouldCreateCostumer(){
         when(costumerCommandClient.createCostumer(any(Costumer.class))).thenReturn(costumer);
+        when(validateEmailIsUniqueService.validate(email)).thenReturn(true);
 
         Costumer result = this.costumerCommandUseCase.createCostumer(costumerDto,email);
 
@@ -53,11 +55,11 @@ class CostumerCommandUseCaseTest {
 
     @Test
     void shouldFailToCreateCostumerWhenEmailAlreadyExists() {
-        when(costumerQueryUseCase.getCostumerByEmail(email)).thenReturn(costumer);
+        when(validateEmailIsUniqueService.validate(email)).thenReturn(false);
 
         Exception exception = assertThrows(IllegalArgumentException.class, () -> this.costumerCommandUseCase.createCostumer(costumerDto, email));
 
-        assertEquals("Costumer with this email already exists", exception.getMessage());
+        assertEquals("Specified email is already in use.", exception.getMessage());
     }
 
 

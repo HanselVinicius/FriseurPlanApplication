@@ -3,7 +3,7 @@ package com.hansel.FriseurPlan.core.domain.appointment;
 
 
 import com.hansel.FriseurPlan.core.domain.Address;
-import com.hansel.FriseurPlan.core.domain.Email;
+import com.hansel.FriseurPlan.core.domain.email.Email;
 import com.hansel.FriseurPlan.core.domain.PhoneNumber;
 import com.hansel.FriseurPlan.core.domain.costumer.Costumer;
 import com.hansel.FriseurPlan.core.domain.hairdresser.Hairdresser;

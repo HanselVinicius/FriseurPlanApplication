@@ -3,7 +3,7 @@ package com.hansel.FriseurPlan.infra.port.input.hairdresser;
 import com.hansel.FriseurPlan.core.application.usecase.dto.HairdresserDto;
 import com.hansel.FriseurPlan.core.application.usecase.hairdresser.command.HairdresserCommandUseCase;
 import com.hansel.FriseurPlan.core.application.usecase.hairdresser.query.HairdresserQueryUseCase;
-import com.hansel.FriseurPlan.core.domain.Email;
+import com.hansel.FriseurPlan.core.domain.email.Email;
 import com.hansel.FriseurPlan.core.domain.hairdresser.Hairdresser;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

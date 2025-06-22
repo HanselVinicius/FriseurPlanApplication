@@ -1,7 +1,7 @@
 package com.hansel.FriseurPlan.infra.port.output.client.hairdresser.query;
 
 import com.hansel.FriseurPlan.core.application.adapter.hairdresser.query.HairdresserQueryClient;
-import com.hansel.FriseurPlan.core.domain.Email;
+import com.hansel.FriseurPlan.core.domain.email.Email;
 import com.hansel.FriseurPlan.core.domain.hairdresser.Hairdresser;
 import com.hansel.FriseurPlan.infra.port.output.client.hairdresser.HairdresserMapper;
 import com.hansel.FriseurPlan.infra.port.output.entities.hairdresser.HairdresserEntity;

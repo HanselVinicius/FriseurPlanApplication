@@ -1,7 +1,7 @@
 package com.hansel.FriseurPlan.infra.port.output.client.costumer.query;
 
 import com.hansel.FriseurPlan.core.application.adapter.costumer.query.CostumerQueryClient;
-import com.hansel.FriseurPlan.core.domain.Email;
+import com.hansel.FriseurPlan.core.domain.email.Email;
 import com.hansel.FriseurPlan.core.domain.costumer.Costumer;
 import com.hansel.FriseurPlan.infra.port.output.client.costumer.CostumerMapper;
 import com.hansel.FriseurPlan.infra.port.output.entities.costumer.CostumerEntity;

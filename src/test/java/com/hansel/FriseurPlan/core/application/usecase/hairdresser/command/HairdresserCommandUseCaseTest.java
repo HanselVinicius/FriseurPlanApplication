@@ -4,8 +4,9 @@ import com.hansel.FriseurPlan.core.application.adapter.hairdresser.command.Haird
 import com.hansel.FriseurPlan.core.application.usecase.dto.HairdresserDto;
 import com.hansel.FriseurPlan.core.application.usecase.hairdresser.query.HairdresserQueryUseCase;
 import com.hansel.FriseurPlan.core.domain.Address;
-import com.hansel.FriseurPlan.core.domain.Email;
+import com.hansel.FriseurPlan.core.domain.email.Email;
 import com.hansel.FriseurPlan.core.domain.PhoneNumber;
+import com.hansel.FriseurPlan.core.domain.email.ValidateEmailIsUniqueService;
 import com.hansel.FriseurPlan.core.domain.hairdresser.Hairdresser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,7 +28,7 @@ class HairdresserCommandUseCaseTest {
     @Mock
     private HairdresserCommandClient hairdresserCommandClient;
     @Mock
-    private HairdresserQueryUseCase hairdresserQueryUseCase;
+    private ValidateEmailIsUniqueService validateEmailIsUniqueService;
     @InjectMocks
     private HairdresserCommandUseCase hairdresserCommandUseCase;
 
@@ -48,6 +49,8 @@ class HairdresserCommandUseCaseTest {
         Hairdresser hairdresser = Hairdresser.create(null, hairdresserDto.name(), new ArrayList<>(), phoneNumber, email, address);
 
         when(hairdresserCommandClient.createHairdresser(any(Hairdresser.class))).thenReturn(hairdresser);
+        when(validateEmailIsUniqueService.validate(hairdresser.getEmail())).thenReturn(true);
+
         Hairdresser result = hairdresserCommandUseCase.createHairdresser(hairdresserDto, email);
 
         verify(hairdresserCommandClient).createHairdresser(any(Hairdresser.class));
@@ -66,12 +69,12 @@ class HairdresserCommandUseCaseTest {
         HairdresserDto hairdresserDto = new HairdresserDto("John Doe", phoneNumber, address);
         Hairdresser hairdresser = Hairdresser.create(null, hairdresserDto.name(), new ArrayList<>(), phoneNumber, email, address);
 
-        when(hairdresserQueryUseCase.getHairdresserByEmail(hairdresser.getEmail())).thenReturn(hairdresser);
+        when(validateEmailIsUniqueService.validate(hairdresser.getEmail())).thenReturn(false);
 
         Exception exception = assertThrows(IllegalArgumentException.class, () ->
             hairdresserCommandUseCase.createHairdresser(hairdresserDto, email)
         );
 
-        assertEquals("Hairdresser with this email already exists", exception.getMessage(), "Should throw an exception when trying to create a hairdresser with an existing email");
+        assertEquals("Specified email is already in use.", exception.getMessage(), "Should throw an exception when trying to create a hairdresser with an existing email");
     }
 }

@@ -2,8 +2,8 @@ package com.hansel.FriseurPlan.core.application.usecase.hairdresser.command;
 
 import com.hansel.FriseurPlan.core.application.adapter.hairdresser.command.HairdresserCommandClient;
 import com.hansel.FriseurPlan.core.application.usecase.dto.HairdresserDto;
-import com.hansel.FriseurPlan.core.application.usecase.hairdresser.query.HairdresserQueryUseCase;
-import com.hansel.FriseurPlan.core.domain.Email;
+import com.hansel.FriseurPlan.core.domain.email.Email;
+import com.hansel.FriseurPlan.core.domain.email.ValidateEmailIsUniqueService;
 import com.hansel.FriseurPlan.core.domain.hairdresser.Hairdresser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class HairdresserCommandUseCase {
 
     private final HairdresserCommandClient hairdresserCommandClient;
-    private final HairdresserQueryUseCase hairdresserQueryUseCase;
+    private final ValidateEmailIsUniqueService validateEmailIsUniqueService;
 
     public Hairdresser createHairdresser(HairdresserDto hairdresserDto, Email email) {
         Hairdresser hairdresser = Hairdresser.create(null,
@@ -25,8 +25,8 @@ public class HairdresserCommandUseCase {
                 email,
                 hairdresserDto.address());
 
-        if (this.hairdresserQueryUseCase.getHairdresserByEmail(email) != null) {
-            throw new IllegalArgumentException("Hairdresser with this email already exists");
+        if (!email.validateEmailIsUnique(validateEmailIsUniqueService)) {
+            throw new IllegalArgumentException("Specified email is already in use.");
         }
 
         return hairdresserCommandClient.createHairdresser(hairdresser);

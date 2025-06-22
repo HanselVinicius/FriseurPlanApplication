@@ -1,6 +1,6 @@
 package com.hansel.FriseurPlan.infra.port.output.entities;
 
-import com.hansel.FriseurPlan.core.domain.Email;
+import com.hansel.FriseurPlan.core.domain.email.Email;
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
