@@ -1,6 +1,6 @@
 package com.hansel.FriseurPlan.infra.port.input.hairdresser;
 
-import com.hansel.FriseurPlan.core.application.usecase.dto.HairdresserDto;
+import com.hansel.FriseurPlan.core.application.usecase.hairdresser.dto.HairdresserDto;
 import com.hansel.FriseurPlan.core.application.usecase.hairdresser.command.HairdresserCommandUseCase;
 import com.hansel.FriseurPlan.core.application.usecase.hairdresser.query.HairdresserQueryUseCase;
 import com.hansel.FriseurPlan.core.domain.email.Email;
@@ -37,13 +37,13 @@ public class HairdresserController {
     @GetMapping
     public ResponseEntity<Hairdresser> getHairdresserByEmail(@AuthenticationPrincipal Jwt jwt) {
         Email email = Email.create(jwt.getClaimAsString("email"), jwt.getClaimAsBoolean("email_verified"));
-        Hairdresser hairdresser = this.hairdresserQueryUseCase.getHairdresserByEmail(email);
+        Hairdresser hairdresser = this.hairdresserQueryUseCase.getHairdresserByEmail(email).toDomain();
         return ResponseEntity.ok(hairdresser);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Hairdresser> getHairdresserById(@PathVariable Long id) {
-        Hairdresser hairdresser = this.hairdresserQueryUseCase.getHairdresserById(id);
+        Hairdresser hairdresser = this.hairdresserQueryUseCase.getHairdresserById(id).toDomain();
         return ResponseEntity.ok(hairdresser);
     }
 

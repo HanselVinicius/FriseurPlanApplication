@@ -1,12 +1,14 @@
 package com.hansel.FriseurPlan.infra.port.output.entities.appointment;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.hansel.FriseurPlan.core.domain.appointment.Appointment;
 import com.hansel.FriseurPlan.infra.port.output.entities.appointment.vo.TimeRangeVo;
 import com.hansel.FriseurPlan.infra.port.output.entities.costumer.CostumerEntity;
 import com.hansel.FriseurPlan.infra.port.output.entities.hairdresser.HairdresserEntity;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SQLRestriction;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -18,6 +20,9 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @SQLRestriction("deleted_at IS NULL")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class AppointmentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,6 +31,7 @@ public class AppointmentEntity {
     private TimeRangeVo timeRangeVo;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "hairdresser_id", nullable = false)
+    @JsonBackReference(value = "hairdresser-appointments")
     private HairdresserEntity hairdresserEntity;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "costumer_id", nullable = false)

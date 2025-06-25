@@ -24,6 +24,6 @@ public class CostumerQueryClientImpl implements CostumerQueryClient {
     @Override
     public Costumer getCostumerById(Long id) {
         CostumerEntity costumerEntity = this.costumerEntityRepository.findById(id).orElseThrow(IllegalArgumentException::new);
-        return CostumerMapper.toCostumer(costumerEntity);
+        return CostumerMapper.toCostumerDomain(costumerEntity);
     }
 }

@@ -1,6 +1,7 @@
 package com.hansel.FriseurPlan.core.application.usecase.hairdresser.query;
 
 import com.hansel.FriseurPlan.core.application.adapter.hairdresser.query.HairdresserQueryClient;
+import com.hansel.FriseurPlan.core.application.usecase.hairdresser.dto.HairdresserReturnDto;
 import com.hansel.FriseurPlan.core.domain.Address;
 import com.hansel.FriseurPlan.core.domain.email.Email;
 import com.hansel.FriseurPlan.core.domain.PhoneNumber;
@@ -28,6 +29,7 @@ class HairdresserQueryUseCaseTest {
     private PhoneNumber phoneNumber;
     private Address address;
     private Hairdresser hairdresser;
+    private HairdresserReturnDto hairdresserReturnDto;
 
     @BeforeEach
     void setUp() {
@@ -35,12 +37,13 @@ class HairdresserQueryUseCaseTest {
         this.phoneNumber = PhoneNumber.create("16992977903");
         this.address = Address.create("123 Main St", 100, "Springfield", "SP", 12345678L);
         this.hairdresser = Hairdresser.create(null, "hairdresser", new ArrayList<>(), phoneNumber, email, address);
+        this.hairdresserReturnDto = HairdresserReturnDto.fromDomain(hairdresser);
     }
     @Test
     void getHairdresserByEmail() {
-        when(hairdresserQueryClient.getHairdresserByEmail(email)).thenReturn(hairdresser);
+        when(hairdresserQueryClient.getHairdresserByEmail(email)).thenReturn(hairdresserReturnDto);
 
-        Hairdresser result = hairdresserQueryUseCase.getHairdresserByEmail(email);
+        Hairdresser result = hairdresserQueryUseCase.getHairdresserByEmail(email).toDomain();
 
         assertNotNull(result);
         assertEquals(hairdresser.getEmail(), result.getEmail());
@@ -54,9 +57,9 @@ class HairdresserQueryUseCaseTest {
 
     @Test
     void getHairdresserById() {
-        when(hairdresserQueryClient.getHairdresserById(1L)).thenReturn(hairdresser);
+        when(hairdresserQueryClient.getHairdresserById(1L)).thenReturn(hairdresserReturnDto);
 
-        Hairdresser result = hairdresserQueryUseCase.getHairdresserById(1L);
+        Hairdresser result = hairdresserQueryUseCase.getHairdresserById(1L).toDomain();
 
         assertNotNull(result);
         assertEquals(hairdresser.getEmail(), result.getEmail());

@@ -17,9 +17,6 @@ public class Appointment {
         this.hairdresser = hairdresser;
     }
 
-    public TimeRange getTimeRange() {
-        return timeRange;
-    }
 
     public static Appointment create(Long id,TimeRange timeRange, Costumer costumer, Hairdresser hairdresser) {
         if (costumer == null || hairdresser == null) {
@@ -33,4 +30,19 @@ public class Appointment {
     }
 
 
+    public Long getId() {
+        return id;
+    }
+
+    public TimeRange getTimeRange() {
+        return timeRange;
+    }
+
+    public Costumer getCostumer() {
+        return costumer;
+    }
+
+    public Hairdresser getHairdresser() {
+        return hairdresser;
+    }
 }

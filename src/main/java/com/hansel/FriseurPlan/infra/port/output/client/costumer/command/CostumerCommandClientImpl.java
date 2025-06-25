@@ -17,6 +17,6 @@ public class CostumerCommandClientImpl implements CostumerCommandClient {
     @Override
     public Costumer createCostumer(Costumer costumer) {
         CostumerEntity costumerEntity = CostumerMapper.toCostumerEntity(costumer);
-        return CostumerMapper.toCostumer(this.costumerEntityRepository.save(costumerEntity));
+        return CostumerMapper.toCostumerDomain(this.costumerEntityRepository.save(costumerEntity));
     }
 }

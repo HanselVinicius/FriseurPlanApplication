@@ -1,6 +1,7 @@
 package com.hansel.FriseurPlan.core.application.usecase.email;
 
 import com.hansel.FriseurPlan.core.application.usecase.costumer.query.CostumerQueryUseCase;
+import com.hansel.FriseurPlan.core.application.usecase.hairdresser.dto.HairdresserReturnDto;
 import com.hansel.FriseurPlan.core.application.usecase.hairdresser.query.HairdresserQueryUseCase;
 import com.hansel.FriseurPlan.core.domain.Address;
 import com.hansel.FriseurPlan.core.domain.PhoneNumber;
@@ -36,6 +37,7 @@ class ValidateEmailIsUniqueUseCaseTest {
     private Address address;
     private Hairdresser hairdresser;
     private Costumer costumer;
+    private HairdresserReturnDto hairdresserReturnDto;
 
     @BeforeEach
     void setUp() {
@@ -45,6 +47,7 @@ class ValidateEmailIsUniqueUseCaseTest {
         this.address = Address.create("123 Main St", 100, "Springfield", "SP", 12345678L);
         this.hairdresser = Hairdresser.create(null, "hairdresser", new ArrayList<>(), phoneNumber, hairdresserEmail, address);
         this.costumer = Costumer.create(null, "teste", "16992977903",costumerEmail);
+        this.hairdresserReturnDto = HairdresserReturnDto.fromDomain(hairdresser);
 
     }
 
@@ -69,7 +72,7 @@ class ValidateEmailIsUniqueUseCaseTest {
 
     @Test
     void shouldReturnFalseWhenHairdresserEmailIsNotUnique() {
-        when(hairdresserQueryUseCase.getHairdresserByEmail(hairdresserEmail)).thenReturn(hairdresser);
+        when(hairdresserQueryUseCase.getHairdresserByEmail(hairdresserEmail)).thenReturn(hairdresserReturnDto);
 
         boolean isUnique = this.validateEmailIsUniqueUseCase.validate(hairdresserEmail);
         assertFalse(isUnique);

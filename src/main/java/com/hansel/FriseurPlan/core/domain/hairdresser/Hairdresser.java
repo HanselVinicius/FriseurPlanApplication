@@ -5,6 +5,7 @@ import com.hansel.FriseurPlan.core.domain.email.Email;
 import com.hansel.FriseurPlan.core.domain.PhoneNumber;
 import com.hansel.FriseurPlan.core.domain.appointment.Appointment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Hairdresser {
@@ -25,6 +26,9 @@ public class Hairdresser {
     }
 
     public static Hairdresser create(Long id, String name, List<Appointment> appointments,PhoneNumber phoneNumber, Email email,Address address) {
+        if (appointments == null) {
+            appointments = new ArrayList<>();
+        }
         return new Hairdresser(id, name, appointments,phoneNumber,email,address);
     }
 
@@ -47,6 +51,13 @@ public class Hairdresser {
 
     public List<Appointment> getAppointments() {
         return appointments;
+    }
+
+    public void setAppointments(List<Appointment> appointments) {
+        this.appointments.clear();
+        if (appointments != null) {
+            this.appointments.addAll(appointments);
+        }
     }
 
     public PhoneNumber getPhoneNumber() {

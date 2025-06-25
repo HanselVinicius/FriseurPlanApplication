@@ -1,4 +1,4 @@
-package com.hansel.FriseurPlan.core.application.usecase.dto;
+package com.hansel.FriseurPlan.core.application.usecase.costumer.dto;
 
 
 import jakarta.validation.constraints.NotBlank;

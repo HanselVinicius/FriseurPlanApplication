@@ -1,5 +1,6 @@
 package com.hansel.FriseurPlan.infra.port.output.client.hairdresser.query;
 
+import com.hansel.FriseurPlan.core.application.usecase.hairdresser.dto.HairdresserReturnDto;
 import com.hansel.FriseurPlan.core.domain.Address;
 import com.hansel.FriseurPlan.core.domain.email.Email;
 import com.hansel.FriseurPlan.core.domain.PhoneNumber;
@@ -48,29 +49,26 @@ class HairdresserQueryClientImplTest {
     void getHairdresserByEmail() {
         when(hairdresserEntityRepository.getHairdresserEntityByEmail(email.getEmail())).thenReturn(hairdresserEntity);
 
-        Hairdresser result = hairdresserQueryClient.getHairdresserByEmail(email);
+        HairdresserReturnDto result = hairdresserQueryClient.getHairdresserByEmail(email);
 
         assertNotNull(result);
-        assertEquals(hairdresser.getEmail().getEmail(), result.getEmail().getEmail());
-        assertEquals(hairdresser.getName(), result.getName());
-        assertEquals(hairdresser.getPhoneNumber(), result.getPhoneNumber());
-        assertEquals(hairdresser.getAddress(), result.getAddress());
-        assertTrue(result.getAppointments().isEmpty(), "Hairdresser should have no appointments");
-        assertNull(result.getId(), "Hairdresser should not have an ID yet");
+        assertEquals(hairdresser.getEmail().getEmail(), result.email().getEmail());
+        assertEquals(hairdresser.getName(), result.name());
+        assertEquals(hairdresser.getPhoneNumber().getNumber(), result.phoneNumber());
+        assertEquals(hairdresser.getAddress(), result.address());
     }
 
     @Test
     void getHairdresserById() {
         when(hairdresserEntityRepository.findById(1L)).thenReturn(Optional.of(hairdresserEntity));
 
-        Hairdresser result = hairdresserQueryClient.getHairdresserById(1L);
+        HairdresserReturnDto result = hairdresserQueryClient.getHairdresserById(1L);
 
         assertNotNull(result);
-        assertEquals(hairdresser.getEmail().getEmail(), result.getEmail().getEmail());
-        assertEquals(hairdresser.getName(), result.getName());
-        assertEquals(hairdresser.getPhoneNumber(), result.getPhoneNumber());
-        assertEquals(hairdresser.getAddress(), result.getAddress());
-        assertTrue(result.getAppointments().isEmpty(), "Hairdresser should have no appointments");
-        assertNull(result.getId(), "Hairdresser should not have an ID yet");
+        assertEquals(hairdresser.getEmail().getEmail(), result.email().getEmail());
+        assertEquals(hairdresser.getName(), result.name());
+        assertEquals(hairdresser.getPhoneNumber().getNumber(), result.phoneNumber());
+        assertEquals(hairdresser.getAddress(), result.address());
+        assertNull(result.id(), "Hairdresser should not have an ID yet");
     }
 }

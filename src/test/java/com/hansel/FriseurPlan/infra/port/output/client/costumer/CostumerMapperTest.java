@@ -22,7 +22,7 @@ class CostumerMapperTest {
     }
 
     @Test
-    void shouldMapCostumerToCostumerEntity() {
+    void shouldMapCostumerToCostumerDomainEntity() {
         Costumer costumer = Costumer.create(1L, "Jane Doe", "16992977903",email);
         CostumerEntity costumerEntity = CostumerMapper.toCostumerEntity(costumer);
 
@@ -35,7 +35,7 @@ class CostumerMapperTest {
     }
 
     @Test
-    void shouldMapCostumerEntityToCostumer() {
+    void shouldMapCostumerEntityToCostumerDomain() {
         PhoneNumber phoneNumber = PhoneNumber.create("16992977903");
         CostumerEntity costumerEntity = CostumerEntity.builder()
                 .id(1L)
@@ -44,7 +44,7 @@ class CostumerMapperTest {
                 .email(emailVo)
                 .build();
 
-        Costumer costumer = CostumerMapper.toCostumer(costumerEntity);
+        Costumer costumer = CostumerMapper.toCostumerDomain(costumerEntity);
 
         assertNotNull(costumer);
         assertEquals(costumerEntity.getId(), costumer.getId());

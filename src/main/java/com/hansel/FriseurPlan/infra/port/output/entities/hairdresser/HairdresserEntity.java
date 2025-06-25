@@ -1,5 +1,7 @@
 package com.hansel.FriseurPlan.infra.port.output.entities.hairdresser;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.hansel.FriseurPlan.core.domain.PhoneNumber;
 import com.hansel.FriseurPlan.core.domain.hairdresser.Hairdresser;
 import com.hansel.FriseurPlan.infra.port.output.entities.AddressVo;
@@ -35,8 +37,9 @@ public class HairdresserEntity {
     private PhoneNumber phoneNumber;
     @Embedded
     private AddressVo address;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,fetch =  FetchType.LAZY)
     @JoinColumn(name = "hairdresser_id")
+    @JsonManagedReference(value = "hairdresser-appointments")
     private final List<AppointmentEntity> appointments = new ArrayList<>();
     @CreationTimestamp
     private LocalDateTime createdAt;
@@ -54,6 +57,27 @@ public class HairdresserEntity {
             this.email.toEmailDomain(),
             this.address.toAddressDomain()
         );
+    }
+
+    public Hairdresser toSimpleHairdresserDomain() {
+
+        PhoneNumber phoneNumber = this.phoneNumber;
+
+        return Hairdresser.create(
+                this.id,
+                this.name,
+                new ArrayList<>(),
+                phoneNumber,
+                this.email.toEmailDomain(),
+                this.address.toAddressDomain()
+        );
+    }
+
+    public void setAppointments(List<AppointmentEntity> appointments) {
+        this.appointments.clear();
+        if (appointments != null) {
+            this.appointments.addAll(appointments);
+        }
     }
 
 

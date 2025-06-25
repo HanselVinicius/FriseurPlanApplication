@@ -15,7 +15,7 @@ public class CostumerMapper {
                 .build();
     }
 
-    public static Costumer toCostumer(CostumerEntity costumerEntity) {
+    public static Costumer toCostumerDomain(CostumerEntity costumerEntity) {
         return Costumer.create(
                 costumerEntity.getId(),
                 costumerEntity.getName(),

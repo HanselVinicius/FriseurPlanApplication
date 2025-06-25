@@ -3,7 +3,7 @@ package com.hansel.FriseurPlan.core.application.usecase.costumer.command;
 import com.hansel.FriseurPlan.core.application.adapter.costumer.command.CostumerCommandClient;
 import com.hansel.FriseurPlan.core.domain.email.Email;
 import com.hansel.FriseurPlan.core.domain.costumer.Costumer;
-import com.hansel.FriseurPlan.core.application.usecase.dto.CostumerDto;
+import com.hansel.FriseurPlan.core.application.usecase.costumer.dto.CostumerDto;
 import com.hansel.FriseurPlan.core.domain.email.ValidateEmailIsUniqueService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
