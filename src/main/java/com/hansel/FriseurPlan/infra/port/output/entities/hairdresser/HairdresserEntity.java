@@ -39,7 +39,6 @@ public class HairdresserEntity {
     private AddressVo address;
     @OneToMany(cascade = CascadeType.ALL,fetch =  FetchType.LAZY)
     @JoinColumn(name = "hairdresser_id")
-    @JsonManagedReference(value = "hairdresser-appointments")
     private final List<AppointmentEntity> appointments = new ArrayList<>();
     @CreationTimestamp
     private LocalDateTime createdAt;
@@ -73,12 +72,6 @@ public class HairdresserEntity {
         );
     }
 
-    public void setAppointments(List<AppointmentEntity> appointments) {
-        this.appointments.clear();
-        if (appointments != null) {
-            this.appointments.addAll(appointments);
-        }
-    }
 
 
 }

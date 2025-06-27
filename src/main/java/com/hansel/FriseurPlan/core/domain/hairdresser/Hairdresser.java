@@ -33,7 +33,7 @@ public class Hairdresser {
     }
 
     public void addAppointment(Appointment appointment) {
-        appointments.stream().filter(a -> a.getTimeRange().overlaps(appointment.getTimeRange()))
+        this.appointments.stream().filter(a -> a.getTimeRange().overlaps(appointment.getTimeRange()))
                 .findFirst()
                 .ifPresent(a -> {
                     throw new IllegalArgumentException("Appointment time overlaps with an existing appointment");
@@ -53,12 +53,6 @@ public class Hairdresser {
         return appointments;
     }
 
-    public void setAppointments(List<Appointment> appointments) {
-        this.appointments.clear();
-        if (appointments != null) {
-            this.appointments.addAll(appointments);
-        }
-    }
 
     public PhoneNumber getPhoneNumber() {
         return phoneNumber;

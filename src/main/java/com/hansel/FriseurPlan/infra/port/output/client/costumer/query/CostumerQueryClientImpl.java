@@ -1,6 +1,7 @@
 package com.hansel.FriseurPlan.infra.port.output.client.costumer.query;
 
 import com.hansel.FriseurPlan.core.application.adapter.costumer.query.CostumerQueryClient;
+import com.hansel.FriseurPlan.core.application.usecase.costumer.dto.CostumerReturnDto;
 import com.hansel.FriseurPlan.core.domain.email.Email;
 import com.hansel.FriseurPlan.core.domain.costumer.Costumer;
 import com.hansel.FriseurPlan.infra.port.output.client.costumer.CostumerMapper;
@@ -16,14 +17,14 @@ public class CostumerQueryClientImpl implements CostumerQueryClient {
     private final CostumerEntityRepository costumerEntityRepository;
 
     @Override
-    public Costumer getCostumerByEmail(Email email) {
+    public CostumerReturnDto getCostumerByEmail(Email email) {
         var costumerEntity = this.costumerEntityRepository.getCostumerEntityByEmail(email.getEmail());
-        return costumerEntity.toCostumerDomain();
+        return CostumerReturnDto.fromEntity(costumerEntity);
     }
 
     @Override
-    public Costumer getCostumerById(Long id) {
+    public CostumerReturnDto getCostumerById(Long id) {
         CostumerEntity costumerEntity = this.costumerEntityRepository.findById(id).orElseThrow(IllegalArgumentException::new);
-        return CostumerMapper.toCostumerDomain(costumerEntity);
+        return CostumerReturnDto.fromEntity(costumerEntity);
     }
 }

@@ -1,6 +1,7 @@
 package com.hansel.FriseurPlan.core.application.usecase.costumer.query;
 
 import com.hansel.FriseurPlan.core.application.adapter.costumer.query.CostumerQueryClient;
+import com.hansel.FriseurPlan.core.application.usecase.costumer.dto.CostumerReturnDto;
 import com.hansel.FriseurPlan.core.domain.email.Email;
 import com.hansel.FriseurPlan.core.domain.costumer.Costumer;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,34 +27,36 @@ class CostumerQueryUseCaseTest {
 
     private Email email;
     private Costumer costumer;
+    private CostumerReturnDto costumerReturnDto;
 
     @BeforeEach
     void setUp() {
         email = Email.create("hanelvinicius@gmail.com", false);
         costumer = Costumer.create(null, "teste", "16992977903",email);
+        costumerReturnDto = CostumerReturnDto.fromDomain(costumer);
     }
 
     @Test
     void shouldGetCostumerByEmail() {
-        when(costumerQueryClient.getCostumerByEmail(any(Email.class))).thenReturn(costumer);
-        Costumer costumerByEmail = this.costumerQueryUseCase.getCostumerByEmail(email);
+        when(costumerQueryClient.getCostumerByEmail(any(Email.class))).thenReturn(costumerReturnDto);
+        CostumerReturnDto costumerByEmail = this.costumerQueryUseCase.getCostumerByEmail(email);
 
 
         verify(costumerQueryClient).getCostumerByEmail(any(Email.class));
         assertNotNull(costumerByEmail);
-        assertEquals("teste", costumerByEmail.getName());
-        assertEquals("16992977903", costumerByEmail.getPhoneNumber().getNumber());
+        assertEquals("teste", costumerByEmail.name());
+        assertEquals("16992977903", costumerByEmail.phoneNumber().getNumber());
     }
 
     @Test
     void shouldGetCostumerById() {
-        when(costumerQueryClient.getCostumerById(any(Long.class))).thenReturn(costumer);
-        Costumer costumerById = this.costumerQueryUseCase.getCostumerById(1L);
+        when(costumerQueryClient.getCostumerById(any(Long.class))).thenReturn(costumerReturnDto);
+        CostumerReturnDto costumerById = this.costumerQueryUseCase.getCostumerById(1L);
 
         verify(costumerQueryClient).getCostumerById(any(Long.class));
         assertNotNull(costumerById);
-        assertEquals("teste", costumerById.getName());
-        assertEquals("16992977903", costumerById.getPhoneNumber().getNumber());
+        assertEquals("teste", costumerById.name());
+        assertEquals("16992977903", costumerById.phoneNumber().getNumber());
     }
 
 

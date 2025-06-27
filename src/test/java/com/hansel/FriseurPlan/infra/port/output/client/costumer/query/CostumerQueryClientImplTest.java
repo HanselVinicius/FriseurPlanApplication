@@ -1,5 +1,6 @@
 package com.hansel.FriseurPlan.infra.port.output.client.costumer.query;
 
+import com.hansel.FriseurPlan.core.application.usecase.costumer.dto.CostumerReturnDto;
 import com.hansel.FriseurPlan.core.domain.email.Email;
 import com.hansel.FriseurPlan.core.domain.costumer.Costumer;
 import com.hansel.FriseurPlan.infra.port.output.client.costumer.CostumerMapper;
@@ -41,14 +42,14 @@ class CostumerQueryClientImplTest {
     @Test
     void getCostumerByEmail() {
         when(costumerEntityRepository.getCostumerEntityByEmail(any(String.class))).thenReturn(costumerEntity);
-        Costumer costumerByEmail = costumerQueryClient.getCostumerByEmail(email);
+        CostumerReturnDto costumerByEmail = costumerQueryClient.getCostumerByEmail(email);
 
         verify(costumerEntityRepository).getCostumerEntityByEmail(any(String.class));
         assertNotNull(costumerByEmail);
-        assertEquals("teste", costumerByEmail.getName());
-        assertEquals("16992977903", costumerByEmail.getPhoneNumber().getNumber());
-        assertEquals(email.getEmail(), costumerByEmail.getEmail().getEmail());
-        assertNull(costumerByEmail.getId());
+        assertEquals("teste", costumerByEmail.name());
+        assertEquals("16992977903", costumerByEmail.phoneNumber().getNumber());
+        assertEquals(email.getEmail(), costumerByEmail.email().getEmail());
+        assertNull(costumerByEmail.id());
     }
 
 
@@ -56,14 +57,14 @@ class CostumerQueryClientImplTest {
     void getCostumerById() {
         when(costumerEntityRepository.findById(any(Long.class))).thenReturn(Optional.of(costumerEntity));
 
-        Costumer costumerByEmail = costumerQueryClient.getCostumerById(1L);
+        CostumerReturnDto costumerByEmail = costumerQueryClient.getCostumerById(1L);
 
         verify(costumerEntityRepository).findById(any(Long.class));
         assertNotNull(costumerByEmail);
-        assertEquals("teste", costumerByEmail.getName());
-        assertEquals("16992977903", costumerByEmail.getPhoneNumber().getNumber());
-        assertEquals(email.getEmail(), costumerByEmail.getEmail().getEmail());
-        assertNull(costumerByEmail.getId());
+        assertEquals("teste", costumerByEmail.name());
+        assertEquals("16992977903", costumerByEmail.phoneNumber().getNumber());
+        assertEquals(email.getEmail(), costumerByEmail.email().getEmail());
+        assertNull(costumerByEmail.id());
     }
 
 }

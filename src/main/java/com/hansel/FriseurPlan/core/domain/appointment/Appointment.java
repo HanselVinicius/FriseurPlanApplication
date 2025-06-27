@@ -19,14 +19,7 @@ public class Appointment {
 
 
     public static Appointment create(Long id,TimeRange timeRange, Costumer costumer, Hairdresser hairdresser) {
-        if (costumer == null || hairdresser == null) {
-            throw new IllegalArgumentException("All parameters must be provided");
-        }
-
-        Appointment appointment = new Appointment(id,timeRange, costumer, hairdresser);
-        hairdresser.addAppointment(appointment);
-
-        return appointment;
+        return new Appointment(id,timeRange, costumer, hairdresser);
     }
 
 

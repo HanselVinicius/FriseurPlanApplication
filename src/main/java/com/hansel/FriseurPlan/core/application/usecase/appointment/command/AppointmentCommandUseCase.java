@@ -2,13 +2,17 @@ package com.hansel.FriseurPlan.core.application.usecase.appointment.command;
 
 import com.hansel.FriseurPlan.core.application.adapter.appointment.command.AppointmentCommandClient;
 import com.hansel.FriseurPlan.core.application.usecase.appointment.dto.AppointmentDto;
+import com.hansel.FriseurPlan.core.application.usecase.costumer.dto.CostumerReturnDto;
 import com.hansel.FriseurPlan.core.application.usecase.costumer.query.CostumerQueryUseCase;
+import com.hansel.FriseurPlan.core.application.usecase.hairdresser.dto.HairdresserReturnDto;
 import com.hansel.FriseurPlan.core.application.usecase.hairdresser.query.HairdresserQueryUseCase;
 import com.hansel.FriseurPlan.core.domain.appointment.Appointment;
-import com.hansel.FriseurPlan.core.domain.costumer.Costumer;
 import com.hansel.FriseurPlan.core.domain.hairdresser.Hairdresser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -19,14 +23,19 @@ public class AppointmentCommandUseCase {
     private final AppointmentCommandClient appointmentCommandClient;
 
     public Appointment createAppointment(AppointmentDto appointmentDto) {
-        Costumer costumerById = this.costumerQueryUseCase.getCostumerById(appointmentDto.costumerId());
-        Hairdresser hairdresserById = this.hairdresserQueryUseCase.getHairdresserById(appointmentDto.hairdresserId()).toDomain();
+        CostumerReturnDto costumerById = this.costumerQueryUseCase.getCostumerById(appointmentDto.costumerId());
+        HairdresserReturnDto hairdresserById = this.hairdresserQueryUseCase.getHairdresserById(appointmentDto.hairdresserId());
+        List<Appointment> appointmentReturnDto = new ArrayList<>(hairdresserById.appointmentReturnDto().stream().map(AppointmentReturnDto::toDomain).toList());
+        Hairdresser domain = hairdresserById.toDomain();
         Appointment appointment = Appointment.create(
                 null,
                 appointmentDto.timeRange(),
-                costumerById,
-                hairdresserById
+                costumerById.toDomain(),
+                domain
         );
+        appointmentReturnDto.add(appointment);
+        appointmentReturnDto.forEach(domain::addAppointment);
+
         return appointmentCommandClient.createAppointment(appointment);
     }
 }

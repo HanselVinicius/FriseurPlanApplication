@@ -1,5 +1,6 @@
 package com.hansel.FriseurPlan.infra.port.input.costumer;
 
+import com.hansel.FriseurPlan.core.application.usecase.costumer.dto.CostumerReturnDto;
 import com.hansel.FriseurPlan.core.application.usecase.costumer.query.CostumerQueryUseCase;
 import com.hansel.FriseurPlan.core.domain.email.Email;
 import com.hansel.FriseurPlan.core.domain.costumer.Costumer;
@@ -39,7 +40,7 @@ public class CostumerController {
     }
 
     @GetMapping
-    public ResponseEntity<Costumer> getCostumerByEmail(
+    public ResponseEntity<CostumerReturnDto> getCostumerByEmail(
             @AuthenticationPrincipal Jwt jwt
     ) {
         Email email = Email.create(jwt.getClaimAsString("email"), jwt.getClaimAsBoolean("email_verified"));
@@ -47,7 +48,7 @@ public class CostumerController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Costumer> getCostumerById(@PathVariable Long id){
+    public ResponseEntity<CostumerReturnDto> getCostumerById(@PathVariable Long id){
         return ResponseEntity.ok(this.costumerQueryUseCase.getCostumerById(id));
     }
 

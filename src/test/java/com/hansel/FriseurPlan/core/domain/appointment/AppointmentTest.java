@@ -47,24 +47,4 @@ class AppointmentTest {
     }
 
 
-    @Test
-    public void shouldThrowExceptionConflictingAppointment() {
-        LocalDateTime startTime = LocalDateTime.of(2023, 10, 1, 10, 0);
-        LocalDateTime endTime = LocalDateTime.of(2023, 10, 1, 11, 0);
-        TimeRange timeRange = TimeRange.create(startTime, endTime);
-
-        LocalDateTime appointedStartTime = LocalDateTime.of(2023, 10, 1, 10, 30);
-        LocalDateTime appointedEndTime = LocalDateTime.of(2023, 10, 1, 11, 0);
-        TimeRange appointedTimeRange = TimeRange.create(appointedStartTime, appointedEndTime);
-
-        Costumer costumer = Costumer.create(1L, "John Doe", "16992977903",email);
-        Hairdresser hairdresser = Hairdresser.create(1L, "Jane Smith", new ArrayList<>(),phoneNumber,email,address);
-
-        Appointment.create(null,appointedTimeRange, costumer, hairdresser);
-
-
-        assertThrows(IllegalArgumentException.class, () -> Appointment.create(null,timeRange, costumer, hairdresser));
-    }
-
-
 }

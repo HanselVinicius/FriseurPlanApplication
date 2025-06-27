@@ -2,6 +2,7 @@ package com.hansel.FriseurPlan.infra.port.input.hairdresser;
 
 import com.hansel.FriseurPlan.core.application.usecase.hairdresser.dto.HairdresserDto;
 import com.hansel.FriseurPlan.core.application.usecase.hairdresser.command.HairdresserCommandUseCase;
+import com.hansel.FriseurPlan.core.application.usecase.hairdresser.dto.HairdresserReturnDto;
 import com.hansel.FriseurPlan.core.application.usecase.hairdresser.query.HairdresserQueryUseCase;
 import com.hansel.FriseurPlan.core.domain.email.Email;
 import com.hansel.FriseurPlan.core.domain.hairdresser.Hairdresser;
@@ -35,16 +36,16 @@ public class HairdresserController {
     }
 
     @GetMapping
-    public ResponseEntity<Hairdresser> getHairdresserByEmail(@AuthenticationPrincipal Jwt jwt) {
+    public ResponseEntity<HairdresserReturnDto> getHairdresserByEmail(@AuthenticationPrincipal Jwt jwt) {
         Email email = Email.create(jwt.getClaimAsString("email"), jwt.getClaimAsBoolean("email_verified"));
-        Hairdresser hairdresser = this.hairdresserQueryUseCase.getHairdresserByEmail(email).toDomain();
-        return ResponseEntity.ok(hairdresser);
+        HairdresserReturnDto returnDto = this.hairdresserQueryUseCase.getHairdresserByEmail(email);
+        return ResponseEntity.ok(returnDto);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Hairdresser> getHairdresserById(@PathVariable Long id) {
-        Hairdresser hairdresser = this.hairdresserQueryUseCase.getHairdresserById(id).toDomain();
-        return ResponseEntity.ok(hairdresser);
+    public ResponseEntity<HairdresserReturnDto> getHairdresserById(@PathVariable Long id) {
+        HairdresserReturnDto returnDto = this.hairdresserQueryUseCase.getHairdresserById(id);
+        return ResponseEntity.ok(returnDto);
     }
 
 }

@@ -7,7 +7,6 @@ import com.hansel.FriseurPlan.infra.port.output.client.hairdresser.HairdresserMa
 import com.hansel.FriseurPlan.infra.port.output.entities.appointment.AppointmentEntity;
 import com.hansel.FriseurPlan.infra.port.output.entities.appointment.vo.TimeRangeVo;
 
-import java.util.ArrayList;
 
 
 public class AppointmentMapper {
@@ -23,7 +22,6 @@ public class AppointmentMapper {
 
     public static Appointment toSimpleAppointment(AppointmentEntity appointmentEntity) {
         Hairdresser simpleDomain = appointmentEntity.getHairdresserEntity().toSimpleHairdresserDomain();
-        simpleDomain.setAppointments(new ArrayList<>());
         return Appointment.create(
                 appointmentEntity.getId(),
                 appointmentEntity.getTimeRangeVo().toTimeRangeDomain(),

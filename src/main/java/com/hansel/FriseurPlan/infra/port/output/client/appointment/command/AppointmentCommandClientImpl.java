@@ -8,8 +8,6 @@ import com.hansel.FriseurPlan.infra.port.output.entities.appointment.Appointment
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-
 @Service
 @RequiredArgsConstructor
 public class AppointmentCommandClientImpl implements AppointmentCommandClient {
@@ -18,7 +16,6 @@ public class AppointmentCommandClientImpl implements AppointmentCommandClient {
 
     @Override
     public Appointment createAppointment(Appointment appointment) {
-        appointment.getHairdresser().setAppointments(new ArrayList<>());
         AppointmentEntity appointmentEntity = AppointmentMapper.toAppointmentEntity(appointment);
         AppointmentEntity save = appointmentEntityRepository.save(appointmentEntity);
         return AppointmentMapper.toSimpleAppointment(save);
