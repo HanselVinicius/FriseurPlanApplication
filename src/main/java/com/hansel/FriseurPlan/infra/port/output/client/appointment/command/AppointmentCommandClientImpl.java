@@ -17,7 +17,7 @@ public class AppointmentCommandClientImpl implements AppointmentCommandClient {
     @Override
     public Appointment createAppointment(Appointment appointment) {
         AppointmentEntity appointmentEntity = AppointmentMapper.toAppointmentEntity(appointment);
-        AppointmentEntity save = appointmentEntityRepository.save(appointmentEntity);
-        return AppointmentMapper.toSimpleAppointment(save);
+        AppointmentEntity entitySaved = appointmentEntityRepository.save(appointmentEntity);
+        return AppointmentMapper.toSimpleAppointment(entitySaved);
     }
 }

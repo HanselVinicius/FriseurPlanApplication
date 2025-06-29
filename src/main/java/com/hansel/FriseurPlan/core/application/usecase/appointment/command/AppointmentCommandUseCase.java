@@ -25,17 +25,22 @@ public class AppointmentCommandUseCase {
     public Appointment createAppointment(AppointmentDto appointmentDto) {
         CostumerReturnDto costumerById = this.costumerQueryUseCase.getCostumerById(appointmentDto.costumerId());
         HairdresserReturnDto hairdresserById = this.hairdresserQueryUseCase.getHairdresserById(appointmentDto.hairdresserId());
-        List<Appointment> appointmentReturnDto = new ArrayList<>(hairdresserById.appointmentReturnDto().stream().map(AppointmentReturnDto::toDomain).toList());
-        Hairdresser domain = hairdresserById.toDomain();
+
+        Hairdresser hairdresserDomain = hairdresserById.toDomain();
         Appointment appointment = Appointment.create(
                 null,
                 appointmentDto.timeRange(),
                 costumerById.toDomain(),
-                domain
+                hairdresserDomain
         );
-        appointmentReturnDto.add(appointment);
-        appointmentReturnDto.forEach(domain::addAppointment);
 
+        this.addAppointmentToHairdresser(hairdresserById, appointment, hairdresserDomain);
         return appointmentCommandClient.createAppointment(appointment);
+    }
+
+    private void addAppointmentToHairdresser(HairdresserReturnDto hairdresserById, Appointment appointment, Hairdresser hairdresserDomain) {
+        List<Appointment> appointmentReturnDto = new ArrayList<>(hairdresserById.appointmentReturnDto().stream().map(AppointmentReturnDto::toDomain).toList());
+        appointmentReturnDto.add(appointment);
+        appointmentReturnDto.forEach(hairdresserDomain::addAppointment);
     }
 }

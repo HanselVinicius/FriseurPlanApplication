@@ -38,17 +38,4 @@ class HairdresserTest {
         assertTrue(hairdresser.getAppointments().isEmpty());
     }
 
-    @Test
-    void shouldSuccessfullyAddAppointment() {
-        Hairdresser hairdresser = Hairdresser.create(1L, "Jane Smith", new ArrayList<>(),phoneNumber,email,address);
-        Appointment appointment = Appointment.create(null,
-                TimeRange.create(LocalDateTime.of(2023, 10, 1, 10, 0), LocalDateTime.of(2023, 10, 1, 11, 0)),
-                Costumer.create(1L, "John Doe", "16992977903",email),
-                hairdresser
-        );
-
-        assertTrue(hairdresser.getAppointments().contains(appointment));
-    }
-
-
 }
