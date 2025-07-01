@@ -41,7 +41,7 @@ class CostumerQueryClientImplTest {
 
     @Test
     void getCostumerByEmail() {
-        when(costumerEntityRepository.getCostumerEntityByEmail(any(String.class))).thenReturn(costumerEntity);
+        when(costumerEntityRepository.getCostumerEntityByEmail(any(String.class))).thenReturn(Optional.of(costumerEntity));
         CostumerReturnDto costumerByEmail = costumerQueryClient.getCostumerByEmail(email);
 
         verify(costumerEntityRepository).getCostumerEntityByEmail(any(String.class));

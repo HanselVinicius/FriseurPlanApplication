@@ -4,6 +4,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface HairdresserEntityRepository extends JpaRepository<HairdresserEntity,Long> {
 
@@ -12,6 +14,6 @@ public interface HairdresserEntityRepository extends JpaRepository<HairdresserEn
                     SELECT * FROM hairdressers h WHERE h.email = ?1 AND h.verified IS TRUE AND h.deleted_at IS NULL
             """, nativeQuery = true
     )
-    HairdresserEntity getHairdresserEntityByEmail(String email);
+    Optional<HairdresserEntity> getHairdresserEntityByEmail(String email);
 
 }

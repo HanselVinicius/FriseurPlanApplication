@@ -47,7 +47,7 @@ class HairdresserQueryClientImplTest {
 
     @Test
     void getHairdresserByEmail() {
-        when(hairdresserEntityRepository.getHairdresserEntityByEmail(email.getEmail())).thenReturn(hairdresserEntity);
+        when(hairdresserEntityRepository.getHairdresserEntityByEmail(email.getEmail())).thenReturn(Optional.of(hairdresserEntity));
 
         HairdresserReturnDto result = hairdresserQueryClient.getHairdresserByEmail(email);
 
