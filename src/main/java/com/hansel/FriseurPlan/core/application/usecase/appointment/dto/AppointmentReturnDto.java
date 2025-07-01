@@ -1,4 +1,4 @@
-package com.hansel.FriseurPlan.core.application.usecase.appointment.command;
+package com.hansel.FriseurPlan.core.application.usecase.appointment.dto;
 
 import com.hansel.FriseurPlan.core.application.usecase.costumer.dto.CostumerReturnDto;
 import com.hansel.FriseurPlan.core.application.usecase.hairdresser.dto.HairdresserReturnDto;
