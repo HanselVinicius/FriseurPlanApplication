@@ -1,5 +1,6 @@
 package com.hansel.FriseurPlan.infra.port.output.entities.hairdresser;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.hansel.FriseurPlan.core.domain.PhoneNumber;
 import com.hansel.FriseurPlan.core.domain.hairdresser.Hairdresser;
 import com.hansel.FriseurPlan.infra.port.output.entities.AddressVo;
@@ -35,7 +36,8 @@ public class HairdresserEntity {
     private PhoneNumber phoneNumber;
     @Embedded
     private AddressVo address;
-    @OneToMany(cascade = CascadeType.ALL,fetch =  FetchType.LAZY,mappedBy = "hairdresserEntity")
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "hairdresserEntity")
+    @JsonManagedReference
     private final List<AppointmentEntity> appointments = new ArrayList<>();
     @CreationTimestamp
     private LocalDateTime createdAt;
@@ -54,21 +56,6 @@ public class HairdresserEntity {
             this.address.toAddressDomain()
         );
     }
-
-    public Hairdresser toSimpleHairdresserDomain() {
-
-        PhoneNumber phoneNumber = this.phoneNumber;
-
-        return Hairdresser.create(
-                this.id,
-                this.name,
-                new ArrayList<>(),
-                phoneNumber,
-                this.email.toEmailDomain(),
-                this.address.toAddressDomain()
-        );
-    }
-
 
 
 }

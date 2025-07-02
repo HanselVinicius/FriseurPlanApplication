@@ -1,6 +1,6 @@
 package com.hansel.FriseurPlan.core.application.usecase.hairdresser.dto;
 
-import com.hansel.FriseurPlan.core.application.usecase.appointment.command.AppointmentReturnDto;
+import com.hansel.FriseurPlan.core.application.usecase.appointment.dto.AppointmentReturnDto;
 import com.hansel.FriseurPlan.core.domain.Address;
 import com.hansel.FriseurPlan.core.domain.PhoneNumber;
 import com.hansel.FriseurPlan.core.domain.email.Email;

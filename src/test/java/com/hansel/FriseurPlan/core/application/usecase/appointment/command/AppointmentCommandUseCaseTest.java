@@ -2,6 +2,7 @@ package com.hansel.FriseurPlan.core.application.usecase.appointment.command;
 
 import com.hansel.FriseurPlan.core.application.adapter.appointment.command.AppointmentCommandClient;
 import com.hansel.FriseurPlan.core.application.usecase.appointment.dto.AppointmentDto;
+import com.hansel.FriseurPlan.core.application.usecase.appointment.dto.AppointmentReturnDto;
 import com.hansel.FriseurPlan.core.application.usecase.costumer.dto.CostumerReturnDto;
 import com.hansel.FriseurPlan.core.application.usecase.costumer.query.CostumerQueryUseCase;
 import com.hansel.FriseurPlan.core.application.usecase.hairdresser.dto.HairdresserReturnDto;

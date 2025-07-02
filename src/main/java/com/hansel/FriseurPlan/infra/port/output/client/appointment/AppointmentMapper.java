@@ -1,7 +1,6 @@
 package com.hansel.FriseurPlan.infra.port.output.client.appointment;
 
 import com.hansel.FriseurPlan.core.domain.appointment.Appointment;
-import com.hansel.FriseurPlan.core.domain.hairdresser.Hairdresser;
 import com.hansel.FriseurPlan.infra.port.output.client.costumer.CostumerMapper;
 import com.hansel.FriseurPlan.infra.port.output.client.hairdresser.HairdresserMapper;
 import com.hansel.FriseurPlan.infra.port.output.entities.appointment.AppointmentEntity;
@@ -21,12 +20,11 @@ public class AppointmentMapper {
     }
 
     public static Appointment toSimpleAppointment(AppointmentEntity appointmentEntity) {
-        Hairdresser simpleDomain = appointmentEntity.getHairdresserEntity().toSimpleHairdresserDomain();
         return Appointment.create(
                 appointmentEntity.getId(),
                 appointmentEntity.getTimeRangeVo().toTimeRangeDomain(),
-                CostumerMapper.toCostumerDomain(appointmentEntity.getCostumerEntity()),
-                simpleDomain);
+                null,
+                null);
     }
 
 

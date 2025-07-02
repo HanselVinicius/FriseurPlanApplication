@@ -2,6 +2,7 @@ package com.hansel.FriseurPlan.core.application.usecase.appointment.command;
 
 import com.hansel.FriseurPlan.core.application.adapter.appointment.command.AppointmentCommandClient;
 import com.hansel.FriseurPlan.core.application.usecase.appointment.dto.AppointmentDto;
+import com.hansel.FriseurPlan.core.application.usecase.appointment.dto.AppointmentReturnDto;
 import com.hansel.FriseurPlan.core.application.usecase.costumer.dto.CostumerReturnDto;
 import com.hansel.FriseurPlan.core.application.usecase.costumer.query.CostumerQueryUseCase;
 import com.hansel.FriseurPlan.core.application.usecase.hairdresser.dto.HairdresserReturnDto;
@@ -11,8 +12,8 @@ import com.hansel.FriseurPlan.core.domain.hairdresser.Hairdresser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -39,7 +40,7 @@ public class AppointmentCommandUseCase {
     }
 
     private void addAppointmentToHairdresser(HairdresserReturnDto hairdresserById, Appointment appointment, Hairdresser hairdresserDomain) {
-        List<Appointment> appointmentReturnDto = new ArrayList<>(hairdresserById.appointmentReturnDto().stream().map(AppointmentReturnDto::toDomain).toList());
+        List<Appointment> appointmentReturnDto = hairdresserById.appointmentReturnDto().stream().map(AppointmentReturnDto::toDomain).collect(Collectors.toList());
         appointmentReturnDto.add(appointment);
         appointmentReturnDto.forEach(hairdresserDomain::addAppointment);
     }

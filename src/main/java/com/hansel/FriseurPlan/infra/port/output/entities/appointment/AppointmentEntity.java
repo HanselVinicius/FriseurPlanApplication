@@ -1,6 +1,7 @@
 package com.hansel.FriseurPlan.infra.port.output.entities.appointment;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.hansel.FriseurPlan.core.domain.appointment.Appointment;
 import com.hansel.FriseurPlan.infra.port.output.entities.appointment.vo.TimeRangeVo;
 import com.hansel.FriseurPlan.infra.port.output.entities.costumer.CostumerEntity;
@@ -29,6 +30,7 @@ public class AppointmentEntity {
     private TimeRangeVo timeRangeVo;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "hairdresser_id", nullable = false)
+    @JsonBackReference
     private HairdresserEntity hairdresserEntity;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "costumer_id", nullable = false)
