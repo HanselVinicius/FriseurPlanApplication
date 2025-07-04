@@ -40,7 +40,7 @@ public class AppointmentCommandUseCase {
     }
 
     private void addAppointmentToHairdresser(HairdresserReturnDto hairdresserById, Appointment appointment, Hairdresser hairdresserDomain) {
-        List<Appointment> appointmentReturnDto = hairdresserById.appointmentReturnDto().stream().map(AppointmentReturnDto::toDomain).collect(Collectors.toList());
+        List<Appointment> appointmentReturnDto = hairdresserById.appointmentReturnDto().stream().map(AppointmentReturnDto::toDomainSimple).collect(Collectors.toList());
         appointmentReturnDto.add(appointment);
         appointmentReturnDto.forEach(hairdresserDomain::addAppointment);
     }

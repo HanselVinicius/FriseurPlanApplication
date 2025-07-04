@@ -8,6 +8,9 @@ import com.hansel.FriseurPlan.core.domain.appointment.Appointment;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 
 @RestController
 @RequestMapping("/v1/appointments")
@@ -20,7 +23,11 @@ public class AppointmentController {
     @PostMapping
     public ResponseEntity<Appointment> createAppointment(@RequestBody AppointmentDto appointmentDto) {
         Appointment appointment = this.appointmentCommandUseCase.createAppointment(appointmentDto);
-        return ResponseEntity.ok(appointment);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(appointment.getId())
+                .toUri();
+        return ResponseEntity.created(location).body(appointment);
     }
 
     @GetMapping("{id}")

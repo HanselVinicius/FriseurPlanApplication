@@ -12,8 +12,16 @@ public record AppointmentReturnDto(
         CostumerReturnDto costumer,
         HairdresserReturnDto hairdresser
 ) {
-
     public static AppointmentReturnDto fromEntity(AppointmentEntity appointmentEntity) {
+        return new AppointmentReturnDto(
+                appointmentEntity.getId(),
+                appointmentEntity.getTimeRangeVo().toTimeRangeDomain(),
+                CostumerReturnDto.fromEntity(appointmentEntity.getCostumerEntity()),
+                HairdresserReturnDto.fromEntitySimple(appointmentEntity.getHairdresserEntity())
+        );
+    }
+
+    public static AppointmentReturnDto fromEntitySimple(AppointmentEntity appointmentEntity) {
         return new AppointmentReturnDto(
                 appointmentEntity.getId(),
                 appointmentEntity.getTimeRangeVo().toTimeRangeDomain(),
@@ -22,7 +30,7 @@ public record AppointmentReturnDto(
         );
     }
 
-    public Appointment toDomain(){
+    public Appointment toDomainSimple(){
         return Appointment.create(
                 null,
                 timeRange,

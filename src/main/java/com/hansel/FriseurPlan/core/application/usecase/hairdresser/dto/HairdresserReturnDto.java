@@ -19,7 +19,7 @@ public record HairdresserReturnDto(
 ) {
 
     public static HairdresserReturnDto fromEntity(HairdresserEntity hairdresserEntity) {
-        List<AppointmentReturnDto> appointmentReturnDto = hairdresserEntity.getAppointments().stream().map(AppointmentReturnDto::fromEntity).toList();
+        List<AppointmentReturnDto> appointmentReturnDto = hairdresserEntity.getAppointments().stream().map(AppointmentReturnDto::fromEntitySimple).toList();
         return new HairdresserReturnDto(
                 hairdresserEntity.getId(),
                 hairdresserEntity.getName(),
@@ -61,6 +61,23 @@ public record HairdresserReturnDto(
                 PhoneNumber.create(phoneNumber),
                 email,
                 address
+        );
+    }
+
+    public static HairdresserReturnDto fromEntitySimple(HairdresserEntity hairdresserEntity) {
+        return new HairdresserReturnDto(
+                hairdresserEntity.getId(),
+                hairdresserEntity.getName(),
+                hairdresserEntity.getPhoneNumber().getNumber(),
+                Email.create(hairdresserEntity.getEmail().getEmail(),hairdresserEntity.getEmail().isVerified()),
+                Address.create(
+                        hairdresserEntity.getAddress().getStreet(),
+                        hairdresserEntity.getAddress().getNumber(),
+                        hairdresserEntity.getAddress().getCity(),
+                        hairdresserEntity.getAddress().getState(),
+                        hairdresserEntity.getAddress().getZipCode()
+                ),
+                null
         );
     }
 }
