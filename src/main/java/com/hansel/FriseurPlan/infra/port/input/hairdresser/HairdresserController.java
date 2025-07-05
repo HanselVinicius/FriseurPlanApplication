@@ -1,7 +1,7 @@
 package com.hansel.FriseurPlan.infra.port.input.hairdresser;
 
-import com.hansel.FriseurPlan.core.application.usecase.hairdresser.dto.HairdresserDto;
 import com.hansel.FriseurPlan.core.application.usecase.hairdresser.command.HairdresserCommandUseCase;
+import com.hansel.FriseurPlan.core.application.usecase.hairdresser.dto.HairdresserDto;
 import com.hansel.FriseurPlan.core.application.usecase.hairdresser.dto.HairdresserReturnDto;
 import com.hansel.FriseurPlan.core.application.usecase.hairdresser.query.HairdresserQueryUseCase;
 import com.hansel.FriseurPlan.core.domain.email.Email;

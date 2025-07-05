@@ -1,8 +1,8 @@
 package com.hansel.FriseurPlan.infra.port.input.appointment;
 
 import com.hansel.FriseurPlan.core.application.usecase.appointment.command.AppointmentCommandUseCase;
-import com.hansel.FriseurPlan.core.application.usecase.appointment.dto.AppointmentReturnDto;
 import com.hansel.FriseurPlan.core.application.usecase.appointment.dto.AppointmentDto;
+import com.hansel.FriseurPlan.core.application.usecase.appointment.dto.AppointmentReturnDto;
 import com.hansel.FriseurPlan.core.application.usecase.appointment.dto.GetAppointmentDto;
 import com.hansel.FriseurPlan.core.application.usecase.appointment.query.AppointmentQueryUseCase;
 import com.hansel.FriseurPlan.core.domain.appointment.Appointment;

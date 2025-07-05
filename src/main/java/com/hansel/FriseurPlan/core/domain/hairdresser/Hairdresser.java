@@ -1,9 +1,9 @@
 package com.hansel.FriseurPlan.core.domain.hairdresser;
 
 import com.hansel.FriseurPlan.core.domain.Address;
-import com.hansel.FriseurPlan.core.domain.email.Email;
 import com.hansel.FriseurPlan.core.domain.PhoneNumber;
 import com.hansel.FriseurPlan.core.domain.appointment.Appointment;
+import com.hansel.FriseurPlan.core.domain.email.Email;
 
 import java.util.ArrayList;
 import java.util.List;
