@@ -1,13 +1,14 @@
 package com.hansel.FriseurPlan.infra.port.output.entities.hairdresser;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface HairdresserEntityRepository extends JpaRepository<HairdresserEntity,Long> {
+public interface HairdresserEntityRepository extends JpaRepository<HairdresserEntity,Long>, JpaSpecificationExecutor<HairdresserEntity> {
 
     @Query(
             value = """
