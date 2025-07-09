@@ -18,7 +18,7 @@ public class GetHairdresserByParamsSpec implements Specification<HairdresserEnti
         Predicate predicate = criteriaBuilder.conjunction();
 
         if (name != null && !name.isBlank()) {
-            String likePattern = "%" + name.toLowerCase() + "%";
+            String likePattern = "%" + name + "%";
             predicate = criteriaBuilder.and(
                     predicate,
                     criteriaBuilder.like(
