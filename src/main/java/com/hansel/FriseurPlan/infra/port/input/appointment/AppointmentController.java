@@ -53,4 +53,14 @@ public class AppointmentController {
         Page<AppointmentReturnDto> appointmentReturnDtoList = this.appointmentQueryUseCase.getAppointments(getAppointmentDto);
         return ResponseEntity.ok(appointmentReturnDtoList);
     }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> deleteAppointmentById(@PathVariable Long id){
+        this.appointmentCommandUseCase.deleteAppointmentById(id);
+        return ResponseEntity.noContent().build();
+    }
+
+
+
+
 }

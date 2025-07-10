@@ -1,6 +1,7 @@
 package com.hansel.FriseurPlan.core.application.usecase.appointment.command;
 
 import com.hansel.FriseurPlan.core.application.adapter.appointment.command.AppointmentCommandClient;
+import com.hansel.FriseurPlan.core.application.adapter.appointment.query.AppointmentQueryClient;
 import com.hansel.FriseurPlan.core.application.usecase.appointment.dto.AppointmentDto;
 import com.hansel.FriseurPlan.core.application.usecase.appointment.dto.AppointmentReturnDto;
 import com.hansel.FriseurPlan.core.application.usecase.costumer.dto.CostumerReturnDto;
@@ -22,6 +23,7 @@ public class AppointmentCommandUseCase {
     private final CostumerQueryUseCase costumerQueryUseCase;
     private final HairdresserQueryUseCase hairdresserQueryUseCase;
     private final AppointmentCommandClient appointmentCommandClient;
+    private final AppointmentQueryClient appointmentQueryClient;
 
     public Appointment createAppointment(AppointmentDto appointmentDto) {
         CostumerReturnDto costumerById = this.costumerQueryUseCase.getCostumerById(appointmentDto.costumerId());
@@ -43,5 +45,13 @@ public class AppointmentCommandUseCase {
         List<Appointment> appointmentReturnDto = hairdresserById.appointmentReturnDto().stream().map(AppointmentReturnDto::toDomainSimple).collect(Collectors.toList());
         appointmentReturnDto.add(appointment);
         appointmentReturnDto.forEach(hairdresserDomain::addAppointment);
+    }
+
+    public void deleteAppointmentById(Long id) {
+        AppointmentReturnDto appointmentById = appointmentQueryClient.getAppointmentById(id);
+        if (appointmentById == null) {
+            throw new RuntimeException("appointment not found");
+        }
+        this.appointmentCommandClient.deleteAppointment(appointmentById.id());
     }
 }

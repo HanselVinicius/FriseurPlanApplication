@@ -6,4 +6,5 @@ public interface AppointmentCommandClient {
 
     Appointment createAppointment(Appointment appointment);
 
+    void deleteAppointment(Long id);
 }

@@ -8,6 +8,8 @@ import com.hansel.FriseurPlan.infra.port.output.entities.appointment.Appointment
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 @RequiredArgsConstructor
 public class AppointmentCommandClientImpl implements AppointmentCommandClient {
@@ -19,5 +21,10 @@ public class AppointmentCommandClientImpl implements AppointmentCommandClient {
         AppointmentEntity appointmentEntity = AppointmentMapper.toAppointmentEntity(appointment);
         AppointmentEntity entitySaved = appointmentEntityRepository.save(appointmentEntity);
         return AppointmentMapper.toSimpleAppointment(entitySaved);
+    }
+
+    @Override
+    public void deleteAppointment(Long id) {
+        this.appointmentEntityRepository.deleteAppointment(id, LocalDateTime.now());
     }
 }
