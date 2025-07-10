@@ -41,8 +41,6 @@ class AppointmentQueryClientImplTest {
 
     @Mock
     private AppointmentEntityRepository appointmentEntityRepository;
-    @Mock
-    private GetAppointmentByRelationSpecs  getAppointmentByRelationSpecs;
     @InjectMocks
     private AppointmentQueryClientImpl appointmentQueryClient;
 

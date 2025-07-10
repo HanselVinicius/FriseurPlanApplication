@@ -1,6 +1,7 @@
 package com.hansel.FriseurPlan.core.application.usecase.hairdresser.query;
 
 import com.hansel.FriseurPlan.core.application.adapter.hairdresser.query.HairdresserQueryClient;
+import com.hansel.FriseurPlan.core.application.usecase.hairdresser.dto.GetHairdresserDto;
 import com.hansel.FriseurPlan.core.application.usecase.hairdresser.dto.HairdresserReturnDto;
 import com.hansel.FriseurPlan.core.domain.Address;
 import com.hansel.FriseurPlan.core.domain.email.Email;
@@ -12,10 +13,15 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class HairdresserQueryUseCaseTest {
@@ -30,6 +36,7 @@ class HairdresserQueryUseCaseTest {
     private Address address;
     private Hairdresser hairdresser;
     private HairdresserReturnDto hairdresserReturnDto;
+    private GetHairdresserDto getHairdresserDto;
 
     @BeforeEach
     void setUp() {
@@ -38,6 +45,7 @@ class HairdresserQueryUseCaseTest {
         this.address = Address.create("123 Main St", 100, "Springfield", "SP", 12345678L);
         this.hairdresser = Hairdresser.create(null, "hairdresser", new ArrayList<>(), phoneNumber, email, address);
         this.hairdresserReturnDto = HairdresserReturnDto.fromDomain(hairdresser);
+        this.getHairdresserDto = new GetHairdresserDto(Pageable.unpaged(),"hairdresser");
     }
     @Test
     void getHairdresserByEmail() {
@@ -68,7 +76,21 @@ class HairdresserQueryUseCaseTest {
         assertEquals(hairdresser.getAddress(), result.getAddress());
         assertTrue(result.getAppointments().isEmpty(), "Hairdresser should have no appointments");
         assertNull(result.getId(), "Hairdresser should not have an ID yet");
-
-
     }
+
+    @Test
+    void getHairdresser(){
+        when(hairdresserQueryClient.getAllHairdressers(getHairdresserDto)).thenReturn(new PageImpl<>(List.of(hairdresserReturnDto)));
+
+        Page<HairdresserReturnDto> result = hairdresserQueryUseCase.getAllHairdressers(getHairdresserDto);
+
+        verify(hairdresserQueryClient).getAllHairdressers(getHairdresserDto);
+        assertNotNull(result);
+        assertEquals(hairdresser.getEmail(), result.getContent().getFirst().email());
+        assertEquals(hairdresser.getName(), result.getContent().getFirst().name());
+        assertEquals(hairdresser.getPhoneNumber().getNumber(), result.getContent().getFirst().phoneNumber());
+        assertEquals(hairdresser.getAddress(), result.getContent().getFirst().address());
+        assertEquals(hairdresser.getId(), result.getContent().getFirst().id());
+    }
+
 }
