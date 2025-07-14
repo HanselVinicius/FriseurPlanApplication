@@ -24,6 +24,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.time.LocalDateTime;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -68,7 +69,12 @@ public class AppointmentCommandClientImplTest {
         when(this.appointmentEntityRepository.save(any())).thenReturn(appointmentEntity);
         this.appointmentCommandClientImpl.createAppointment(appointment);
         verify(appointmentEntityRepository).save(any(AppointmentEntity.class));
+    }
 
+    @Test
+    public void shouldDeleteAppointment() {
+        this.appointmentCommandClientImpl.deleteAppointment(1L);
+        verify(appointmentEntityRepository).deleteAppointment(eq(1L), any());
     }
 
 }

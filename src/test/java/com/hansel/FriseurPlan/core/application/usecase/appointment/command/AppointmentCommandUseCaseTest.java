@@ -1,6 +1,7 @@
 package com.hansel.FriseurPlan.core.application.usecase.appointment.command;
 
 import com.hansel.FriseurPlan.core.application.adapter.appointment.command.AppointmentCommandClient;
+import com.hansel.FriseurPlan.core.application.adapter.appointment.query.AppointmentQueryClient;
 import com.hansel.FriseurPlan.core.application.usecase.appointment.dto.AppointmentDto;
 import com.hansel.FriseurPlan.core.application.usecase.appointment.dto.AppointmentReturnDto;
 import com.hansel.FriseurPlan.core.application.usecase.costumer.dto.CostumerReturnDto;
@@ -32,6 +33,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -44,6 +46,8 @@ public class AppointmentCommandUseCaseTest {
     private HairdresserQueryUseCase hairdresserQueryUseCase;
     @Mock
     private AppointmentCommandClient appointmentCommandClient;
+    @Mock
+    private AppointmentQueryClient appointmentQueryClient;
     @InjectMocks
     private AppointmentCommandUseCase appointmentCommandUseCase;
 
@@ -111,6 +115,21 @@ public class AppointmentCommandUseCaseTest {
 
         assertEquals("Appointment time overlaps with an existing appointment", exception.getMessage());
 
+    }
+
+    @Test
+    public void shouldDeleteAppointment() {
+        when(this.appointmentQueryClient.getAppointmentById(any(Long.class))).thenReturn(appointmentReturnDto);
+        this.appointmentCommandUseCase.deleteAppointmentById(1L);
+        verify(this.appointmentCommandClient).deleteAppointment(eq(1L));
+    }
+
+
+    @Test
+    public void shouldFailAppointment() {
+        when(this.appointmentQueryClient.getAppointmentById(any(Long.class))).thenReturn(null);
+        Exception exception = assertThrows(RuntimeException.class,() -> this.appointmentCommandUseCase.deleteAppointmentById(1L));
+        assertEquals("appointment not found", exception.getMessage());
     }
 
 
