@@ -1,8 +1,10 @@
 package com.hansel.FriseurPlan.infra.port.input.appointment;
 
+import dasniko.testcontainers.keycloak.KeycloakContainer;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.keycloak.admin.client.Keycloak;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.DynamicPropertyRegistry;
@@ -26,17 +28,10 @@ class AppointmentControllerTest {
             .withExposedPorts(5432);
 
     @Container
-    static final GenericContainer<?> keycloakContainer = new GenericContainer<>("quay.io/keycloak/keycloak:26.2")
-            .withExposedPorts(8080)
-            .withEnv("KEYCLOAK_ADMIN", "admin")
-            .withEnv("KEYCLOAK_ADMIN_PASSWORD", "admin")
-            .withEnv("KC_DB", "dev-file")
-            .withCommand("start-dev")
-            .withCopyFileToContainer(
-                    MountableFile.forClasspathResource("test-realm-export.json"),
-                    "/opt/keycloak/data/import/test-realm-export.json"
-            )
-            .withEnv("KEYCLOAK_IMPORT", "/opt/keycloak/data/import/test-realm-export.json");
+    static final KeycloakContainer keycloakContainer = new KeycloakContainer("quay.io/keycloak/keycloak:26.2")
+            .withRealmImportFile("test-realm-export.json");
+
+
 
 
     @BeforeAll
