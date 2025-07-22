@@ -11,7 +11,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableWebSecurity
-@Profile("!test") // só ativa fora de "test"
+@Profile("!test")
 public class SecurityConfig {
 
     @Bean
