@@ -28,7 +28,9 @@ public class AppointmentCommandUseCase {
     public Appointment createAppointment(AppointmentDto appointmentDto) {
         CostumerReturnDto costumerById = this.costumerQueryUseCase.getCostumerById(appointmentDto.costumerId());
         HairdresserReturnDto hairdresserById = this.hairdresserQueryUseCase.getHairdresserById(appointmentDto.hairdresserId());
-
+        if(costumerById == null || hairdresserById == null){
+            throw new IllegalArgumentException("costumerId and HairdresserId can not be null");
+        }
         Hairdresser hairdresserDomain = hairdresserById.toDomain();
         Appointment appointment = Appointment.create(
                 null,
