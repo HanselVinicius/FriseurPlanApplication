@@ -17,7 +17,6 @@ import com.hansel.FriseurPlan.infra.port.output.entities.costumer.CostumerEntity
 import com.hansel.FriseurPlan.infra.port.output.entities.costumer.CostumerEntityRepository;
 import com.hansel.FriseurPlan.infra.port.output.entities.hairdresser.HairdresserEntity;
 import com.hansel.FriseurPlan.infra.port.output.entities.hairdresser.HairdresserEntityRepository;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +26,9 @@ import org.springframework.test.web.servlet.MvcResult;
 
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -70,12 +70,6 @@ class AppointmentControllerTest extends BaseIntegrationTest {
         appointmentDto = new AppointmentDto(timeRange, 1L, 1L);
     }
 
-    @AfterEach
-    void tearDown() {
-        this.appointmentEntityRepository.deleteAll();
-        this.costumerEntityRepository.deleteAll();
-        this.hairdresserEntityRepository.deleteAll();
-    }
 
 
     @Test
@@ -163,5 +157,80 @@ class AppointmentControllerTest extends BaseIntegrationTest {
     }
 
 
+    @Test
+    public void shouldDeleteAppointmentSuccessfully() throws Exception {
+        AppointmentEntity appointmentEntity = new AppointmentEntity(
+                null,
+                new TimeRangeVo(LocalDateTime.now().minusHours(1L),LocalDateTime.now().plusHours(2L)),
+                hairdresserEntity,
+                costumerEntity,
+                LocalDateTime.MAX,
+                LocalDateTime.MAX,
+                null
+        );
 
+        AppointmentEntity save = appointmentEntityRepository.save(appointmentEntity);
+        this.mvc.perform(
+                        delete("/v1/appointments/"+save.getId())
+                )
+                .andDo(print())
+                .andExpect(status().isNoContent());
+    }
+
+
+    @Test
+    public void shouldFailToDeleteAppointment() throws Exception {
+        this.mvc.perform(
+                        delete("/v1/appointments/9999")
+                )
+                .andDo(print())
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void shouldGetAppointments() throws Exception {
+        AppointmentEntity appointmentEntity = new AppointmentEntity(
+                null,
+                new TimeRangeVo(LocalDateTime.now().minusHours(1L),LocalDateTime.now().plusHours(2L)),
+                hairdresserEntity,
+                costumerEntity,
+                LocalDateTime.MAX,
+                LocalDateTime.MAX,
+                null
+        );
+
+        appointmentEntityRepository.save(appointmentEntity);
+        MvcResult mvcResult = this.mvc.perform(
+                        get("/v1/appointments")
+                )
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andReturn();
+
+        assertTrue(mvcResult.getResponse().getContentAsString().contains("id"));
+    }
+
+
+    @Test
+    public void shouldGetAppointmentsById() throws Exception {
+        AppointmentEntity appointmentEntity = new AppointmentEntity(
+                null,
+                new TimeRangeVo(LocalDateTime.now().minusHours(1L),LocalDateTime.now().plusHours(2L)),
+                hairdresserEntity,
+                costumerEntity,
+                LocalDateTime.MAX,
+                LocalDateTime.MAX,
+                null
+        );
+
+        AppointmentEntity save = appointmentEntityRepository.save(appointmentEntity);
+        MvcResult mvcResult = this.mvc.perform(
+                        get("/v1/appointments/"+save.getId())
+                )
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andReturn();
+
+        assertTrue(mvcResult.getResponse().getContentAsString().contains("id"));
+    }
 }

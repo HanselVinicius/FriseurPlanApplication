@@ -52,7 +52,7 @@ public class AppointmentCommandUseCase {
     public void deleteAppointmentById(Long id) {
         AppointmentReturnDto appointmentById = appointmentQueryClient.getAppointmentById(id);
         if (appointmentById == null) {
-            throw new RuntimeException("appointment not found");
+            throw new IllegalArgumentException("appointment with id " +  id + " does not exist");
         }
         this.appointmentCommandClient.deleteAppointment(appointmentById.id());
     }
