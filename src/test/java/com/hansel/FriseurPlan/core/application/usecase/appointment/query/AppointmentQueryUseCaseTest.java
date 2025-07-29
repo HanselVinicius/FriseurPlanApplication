@@ -1,9 +1,8 @@
 package com.hansel.FriseurPlan.core.application.usecase.appointment.query;
 
-import com.hansel.FriseurPlan.core.application.adapter.appointment.query.AppointmentQueryClient;
+import com.hansel.FriseurPlan.core.application.port.appointment.query.AppointmentQueryClient;
 import com.hansel.FriseurPlan.core.application.usecase.appointment.dto.AppointmentReturnDto;
 import com.hansel.FriseurPlan.core.application.usecase.appointment.dto.GetAppointmentDto;
-import com.hansel.FriseurPlan.core.domain.appointment.Appointment;
 import com.hansel.FriseurPlan.core.domain.appointment.TimeRange;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

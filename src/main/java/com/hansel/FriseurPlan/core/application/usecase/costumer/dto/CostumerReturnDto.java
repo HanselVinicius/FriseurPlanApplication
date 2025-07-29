@@ -3,7 +3,7 @@ package com.hansel.FriseurPlan.core.application.usecase.costumer.dto;
 import com.hansel.FriseurPlan.core.domain.PhoneNumber;
 import com.hansel.FriseurPlan.core.domain.costumer.Costumer;
 import com.hansel.FriseurPlan.core.domain.email.Email;
-import com.hansel.FriseurPlan.infra.port.output.entities.costumer.CostumerEntity;
+import com.hansel.FriseurPlan.infra.adapter.output.entities.costumer.CostumerEntity;
 
 public record CostumerReturnDto(
     Long id,

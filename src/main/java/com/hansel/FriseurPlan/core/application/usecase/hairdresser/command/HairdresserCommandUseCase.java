@@ -1,6 +1,6 @@
 package com.hansel.FriseurPlan.core.application.usecase.hairdresser.command;
 
-import com.hansel.FriseurPlan.core.application.adapter.hairdresser.command.HairdresserCommandClient;
+import com.hansel.FriseurPlan.core.application.port.hairdresser.command.HairdresserCommandClient;
 import com.hansel.FriseurPlan.core.application.usecase.hairdresser.dto.HairdresserDto;
 import com.hansel.FriseurPlan.core.domain.email.Email;
 import com.hansel.FriseurPlan.core.domain.email.ValidateEmailIsUniqueService;

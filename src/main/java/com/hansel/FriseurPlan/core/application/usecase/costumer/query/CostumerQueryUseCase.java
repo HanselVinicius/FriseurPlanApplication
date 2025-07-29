@@ -1,6 +1,6 @@
 package com.hansel.FriseurPlan.core.application.usecase.costumer.query;
 
-import com.hansel.FriseurPlan.core.application.adapter.costumer.query.CostumerQueryClient;
+import com.hansel.FriseurPlan.core.application.port.costumer.query.CostumerQueryClient;
 import com.hansel.FriseurPlan.core.application.usecase.costumer.dto.CostumerReturnDto;
 import com.hansel.FriseurPlan.core.domain.email.Email;
 import lombok.RequiredArgsConstructor;

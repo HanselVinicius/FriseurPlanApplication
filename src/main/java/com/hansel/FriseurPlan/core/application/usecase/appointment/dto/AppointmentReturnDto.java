@@ -4,7 +4,7 @@ import com.hansel.FriseurPlan.core.application.usecase.costumer.dto.CostumerRetu
 import com.hansel.FriseurPlan.core.application.usecase.hairdresser.dto.HairdresserReturnDto;
 import com.hansel.FriseurPlan.core.domain.appointment.Appointment;
 import com.hansel.FriseurPlan.core.domain.appointment.TimeRange;
-import com.hansel.FriseurPlan.infra.port.output.entities.appointment.AppointmentEntity;
+import com.hansel.FriseurPlan.infra.adapter.output.entities.appointment.AppointmentEntity;
 
 public record AppointmentReturnDto(
         Long id,

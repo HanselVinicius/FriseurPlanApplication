@@ -1,7 +1,7 @@
 package com.hansel.FriseurPlan.core.application.usecase.appointment.command;
 
-import com.hansel.FriseurPlan.core.application.adapter.appointment.command.AppointmentCommandClient;
-import com.hansel.FriseurPlan.core.application.adapter.appointment.query.AppointmentQueryClient;
+import com.hansel.FriseurPlan.core.application.port.appointment.command.AppointmentCommandClient;
+import com.hansel.FriseurPlan.core.application.port.appointment.query.AppointmentQueryClient;
 import com.hansel.FriseurPlan.core.application.usecase.appointment.dto.AppointmentDto;
 import com.hansel.FriseurPlan.core.application.usecase.appointment.dto.AppointmentReturnDto;
 import com.hansel.FriseurPlan.core.application.usecase.costumer.dto.CostumerReturnDto;
@@ -15,12 +15,12 @@ import com.hansel.FriseurPlan.core.domain.appointment.TimeRange;
 import com.hansel.FriseurPlan.core.domain.costumer.Costumer;
 import com.hansel.FriseurPlan.core.domain.email.Email;
 import com.hansel.FriseurPlan.core.domain.hairdresser.Hairdresser;
-import com.hansel.FriseurPlan.infra.port.output.entities.AddressVo;
-import com.hansel.FriseurPlan.infra.port.output.entities.EmailVo;
-import com.hansel.FriseurPlan.infra.port.output.entities.appointment.AppointmentEntity;
-import com.hansel.FriseurPlan.infra.port.output.entities.appointment.vo.TimeRangeVo;
-import com.hansel.FriseurPlan.infra.port.output.entities.costumer.CostumerEntity;
-import com.hansel.FriseurPlan.infra.port.output.entities.hairdresser.HairdresserEntity;
+import com.hansel.FriseurPlan.infra.adapter.output.entities.AddressVo;
+import com.hansel.FriseurPlan.infra.adapter.output.entities.EmailVo;
+import com.hansel.FriseurPlan.infra.adapter.output.entities.appointment.AppointmentEntity;
+import com.hansel.FriseurPlan.infra.adapter.output.entities.appointment.vo.TimeRangeVo;
+import com.hansel.FriseurPlan.infra.adapter.output.entities.costumer.CostumerEntity;
+import com.hansel.FriseurPlan.infra.adapter.output.entities.hairdresser.HairdresserEntity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -129,7 +129,7 @@ public class AppointmentCommandUseCaseTest {
     public void shouldFailAppointment() {
         when(this.appointmentQueryClient.getAppointmentById(any(Long.class))).thenReturn(null);
         Exception exception = assertThrows(RuntimeException.class,() -> this.appointmentCommandUseCase.deleteAppointmentById(1L));
-        assertEquals("appointment not found", exception.getMessage());
+        assertEquals("appointment with id 1 does not exist", exception.getMessage());
     }
 
 

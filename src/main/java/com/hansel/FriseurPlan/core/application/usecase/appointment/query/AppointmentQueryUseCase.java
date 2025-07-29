@@ -1,6 +1,6 @@
 package com.hansel.FriseurPlan.core.application.usecase.appointment.query;
 
-import com.hansel.FriseurPlan.core.application.adapter.appointment.query.AppointmentQueryClient;
+import com.hansel.FriseurPlan.core.application.port.appointment.query.AppointmentQueryClient;
 import com.hansel.FriseurPlan.core.application.usecase.appointment.dto.AppointmentReturnDto;
 import com.hansel.FriseurPlan.core.application.usecase.appointment.dto.GetAppointmentDto;
 import lombok.RequiredArgsConstructor;
