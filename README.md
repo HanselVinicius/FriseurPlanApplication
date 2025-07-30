@@ -25,17 +25,16 @@ docker compose up --build
 3. Then run the java application
    
 ## Environment Variables
-| Variable Name             | Description                                            | Example Value                                    |
-|---------------------------|--------------------------------------------------------|--------------------------------------------------|
-| `POSTGRES_PASSWORD`       | Password for both Keycloak and app PostgreSQL user     | `mypassword`                                     |
-| `POSTGRES_USER`           | Username for both Keycloak and app PostgreSQL database | `friseur_user`                                   |
-| `POSTGRES_DB_URL`         | Hostname or address of the main PostgreSQL database    | `localhost`                                      |
-| `POSTGRES_DB`             | Name of the application's PostgreSQL database          | `friseurplan` or `FriseurPlanDb`                 |
-| `KEYCLOAK_ADMIN`          | Admin username for Keycloak                            | `admin`                                          |
-| `KEYCLOAK_ADMIN_PASSWORD` | Admin password for Keycloak                            | `adminpassword`                                  |
-| `KEYCLOAK_DB_URL`         | JDBC URL for Keycloak’s PostgreSQL database            | `jdbc:postgresql://keycloak-db:5432/FriseurAuth` |
-| `CLIENT_ID`               | Keycloak client ID                                     | `friseurplan-client`                             |
-| `CLIENT_SECRET`           | Keycloak client secret                                 | `asfddahrtgsdgarfeafegea`                        |
-| `REALM`                   | Keycloak Realm                                         | `FriseurPlanRealm`                               |
 
-## Tests
+| Variable                  | Description                                                                    | Example                                          |
+|---------------------------|--------------------------------------------------------------------------------|--------------------------------------------------|
+| `POSTGRES_PASSWORD`       | Senha do usuário do PostgreSQL (tanto para a aplicação quanto para o Keycloak) | `pgpw`                                           |
+| `POSTGRES_USER`           | Nome de usuário do PostgreSQL                                                  | `friseur_user`                                   |
+| `POSTGRES_DB_URL`         | Hostname ou endereço do banco PostgreSQL da aplicação                          | `localhost`                                      |
+| `POSTGRES_DB`             | Nome do banco de dados da aplicação                                            | `FriseurPlanDb`                                  |
+| `KEYCLOAK_ADMIN`          | Nome de usuário do administrador do Keycloak                                   | `admin`                                          |
+| `KEYCLOAK_ADMIN_PASSWORD` | Senha do administrador do Keycloak                                             | `adminpassword`                                  |
+| `KEYCLOAK_DB_URL`         | URL JDBC do banco PostgreSQL usado pelo Keycloak                               | `jdbc:postgresql://keycloak-db:5432/FriseurAuth` |
+| `CLIENT_ID`               | ID do cliente registrado no Keycloak                                           | `FriseurPlan`                                    |
+| `CLIENT_SECRET`           | Segredo do cliente registrado no Keycloak                                      | `KzwIVXQgWYPaE48GEr5GZtE4eNUjhxzX`               |
+| `REALM`                   | Nome do Realm usado no Keycloak                                                | `FriseurPlanRealm`                               |
