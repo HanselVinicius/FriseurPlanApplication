@@ -2,6 +2,7 @@ package com.hansel.FriseurPlan.infra.adapter.input.costumer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hansel.FriseurPlan.BaseIntegrationTest;
+import com.hansel.FriseurPlan.IntegrationTest;
 import com.hansel.FriseurPlan.core.application.usecase.costumer.dto.CostumerDto;
 import com.hansel.FriseurPlan.core.domain.PhoneNumber;
 import com.hansel.FriseurPlan.core.domain.email.Email;
@@ -23,7 +24,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-class CostumerControllerTest extends BaseIntegrationTest {
+@IntegrationTest
+class CostumerControllerTest {
 
 
     @Autowired

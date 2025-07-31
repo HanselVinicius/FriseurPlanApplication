@@ -48,10 +48,10 @@ public abstract class BaseIntegrationTest {
         registry.add("spring.datasource.url", postgresContainer::getJdbcUrl);
         registry.add("spring.datasource.username", postgresContainer::getUsername);
         registry.add("spring.datasource.password", postgresContainer::getPassword);
-        String host = keycloakContainer.getHost();
-        Integer port = keycloakContainer.getMappedPort(8080);
-        String issuerUri = "http://" + host + ":" + port + "/realms/FriseurPlanRealm";
-        registry.add("spring.security.oauth2.resourceserver.jwt.issuer-uri", () -> issuerUri);
-        registry.add("spring.security.oauth2.client.provider.keycloak.issuer-uri", () -> issuerUri);
+//        String host = keycloakContainer.getHost();
+//        Integer port = keycloakContainer.getMappedPort(8080);
+//        String issuerUri = "http://" + host + ":" + port + "/realms/FriseurPlanRealm";
+//        registry.add("spring.security.oauth2.resourceserver.jwt.issuer-uri", () -> issuerUri);
+//        registry.add("spring.security.oauth2.client.provider.keycloak.issuer-uri", () -> issuerUri);
     }
 }
