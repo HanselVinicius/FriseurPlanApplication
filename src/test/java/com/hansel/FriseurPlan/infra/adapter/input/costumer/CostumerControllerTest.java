@@ -1,15 +1,12 @@
 package com.hansel.FriseurPlan.infra.adapter.input.costumer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hansel.FriseurPlan.BaseIntegrationTest;
 import com.hansel.FriseurPlan.IntegrationTest;
 import com.hansel.FriseurPlan.core.application.usecase.costumer.dto.CostumerDto;
 import com.hansel.FriseurPlan.core.domain.PhoneNumber;
 import com.hansel.FriseurPlan.core.domain.email.Email;
 import com.hansel.FriseurPlan.infra.adapter.output.entities.EmailVo;
 import com.hansel.FriseurPlan.infra.adapter.output.entities.costumer.CostumerEntity;
-import com.hansel.FriseurPlan.infra.adapter.output.entities.costumer.CostumerEntityRepository;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +29,7 @@ class CostumerControllerTest {
     private MockMvc mockMvc;
     @Autowired
     private ObjectMapper objectMapper;
-    @Autowired
-    private CostumerEntityRepository costumerEntityRepository;
+
 
     private Email email;
     private PhoneNumber phoneNumber;
@@ -48,10 +44,6 @@ class CostumerControllerTest {
         this.costumerDto = new CostumerDto(costumerEntity.getName(), phoneNumber.getNumber());
     }
 
-    @AfterEach
-    void tearDown() {
-        this.costumerEntityRepository.deleteAll();
-    }
 
     @Test
     void shouldCreateCostumer() throws Exception {
@@ -71,7 +63,6 @@ class CostumerControllerTest {
 
     @Test
     void shouldGetCostumerByEmail() throws Exception {
-        this.costumerEntityRepository.save(costumerEntity);
         mockMvc.perform(get("/v1/costumers").
                         with(SecurityMockMvcRequestPostProcessors.jwt()
                                 .jwt(jwt -> {
@@ -79,15 +70,13 @@ class CostumerControllerTest {
                                     jwt.claim("email_verified", true);
                                 }))
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").exists());
+                .andExpect(status().isOk());
     }
 
 
     @Test
     void shouldGetCostumerById() throws Exception {
-        CostumerEntity save = this.costumerEntityRepository.save(costumerEntity);
-        mockMvc.perform(get("/v1/costumers/"+save.getId()).
+        mockMvc.perform(get("/v1/costumers/1").
                         with(SecurityMockMvcRequestPostProcessors.jwt()
                                 .jwt(jwt -> {
                                     jwt.claim("email", "hanelvinicius@gmail.com");

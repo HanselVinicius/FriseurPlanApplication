@@ -1,7 +1,6 @@
 package com.hansel.FriseurPlan.infra.adapter.input.appointment;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hansel.FriseurPlan.BaseIntegrationTest;
 import com.hansel.FriseurPlan.IntegrationTest;
 import com.hansel.FriseurPlan.core.application.usecase.appointment.dto.AppointmentDto;
 import com.hansel.FriseurPlan.core.domain.Address;

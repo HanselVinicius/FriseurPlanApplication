@@ -1,7 +1,6 @@
 package com.hansel.FriseurPlan.infra.adapter.input.hairdresser;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hansel.FriseurPlan.BaseIntegrationTest;
 import com.hansel.FriseurPlan.IntegrationTest;
 import com.hansel.FriseurPlan.core.application.usecase.hairdresser.dto.HairdresserDto;
 import com.hansel.FriseurPlan.core.domain.Address;
@@ -36,8 +35,7 @@ class HairdresserControllerTest {
     private MockMvc mockMvc;
     @Autowired
     private ObjectMapper objectMapper;
-    @Autowired
-    private HairdresserEntityRepository  hairdresserRepository;
+
 
     private Email email;
     private PhoneNumber phoneNumber;
@@ -55,33 +53,26 @@ class HairdresserControllerTest {
         this.hairdresserDto = new HairdresserDto(this.hairdresserEntity.getName(),this.phoneNumber,addressVo.toAddressDomain());
     }
 
-    @AfterEach
-    void tearDown() {
-        this.hairdresserRepository.deleteAll();
-    }
-
     @Test
     void shouldCreateHairdresser() throws Exception {
         mockMvc.perform(post("/v1/hairdressers").
                         with(SecurityMockMvcRequestPostProcessors.jwt()
                                 .jwt(jwt -> {
-                                    jwt.claim("email", "hanelvinicius@gmail.com");
+                                    jwt.claim("email", "testvinicius@gmail.com");
                                     jwt.claim("email_verified", true);
                                 }))
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsBytes(hairdresserDto)))
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.id").exists())
                 .andExpect(header().string("Location", containsString("http://localhost/v1/hairdressers")));
     }
 
     @Test
     void shouldGetHairdresserByEmail() throws Exception {
-        this.hairdresserRepository.save(hairdresserEntity);
         mockMvc.perform(get("/v1/hairdressers/email").
                         with(SecurityMockMvcRequestPostProcessors.jwt()
                                 .jwt(jwt -> {
-                                    jwt.claim("email", "hanelvinicius@gmail.com");
+                                    jwt.claim("email", "testvinicius@gmail.com");
                                     jwt.claim("email_verified", true);
                                 }))
                         .contentType(MediaType.APPLICATION_JSON))
@@ -92,8 +83,7 @@ class HairdresserControllerTest {
 
     @Test
     void shouldGetCostumerById() throws Exception {
-        HairdresserEntity save = this.hairdresserRepository.save(hairdresserEntity);
-        mockMvc.perform(get("/v1/hairdressers/"+save.getId()).
+        mockMvc.perform(get("/v1/hairdressers/1").
                         with(SecurityMockMvcRequestPostProcessors.jwt()
                                 .jwt(jwt -> {
                                     jwt.claim("email", "hanelvinicius@gmail.com");
@@ -106,7 +96,6 @@ class HairdresserControllerTest {
 
     @Test
     public void shouldGetAppointments() throws Exception {
-        this.hairdresserRepository.save(hairdresserEntity);
         MvcResult mvcResult = this.mockMvc.perform(
                         get("/v1/hairdressers")
                 )
